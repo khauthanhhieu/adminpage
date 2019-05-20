@@ -1,0 +1,21 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#map iframe
+{
+  width: -webkit-fill-available;
+}
+
+.cart_quantity h4 {
+  text-align: center;
+}
+
+.order_date p {
+  text-align: center;
+}

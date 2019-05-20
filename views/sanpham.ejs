@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <title>Quản lí sản phẩm giang hàng</title>
+    <% include partials/headadmin %>
+
+</head>
+
+<body class="animsition">
+<div class="page-wrapper">
+    <!-- HEADER MOBILE-->
+    <header class="header-mobile d-block d-lg-none">
+        <% include partials/headeradmin.ejs %>
+    </header>
+    <!-- END HEADER MOBILE-->
+
+    <!-- MENU SIDEBAR-->
+    <aside class="menu-sidebar d-none d-lg-block">
+        <% include partials/menusidebar.ejs %>
+    </aside>
+    <!-- END MENU SIDEBAR-->
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop">
+            <% include partials/headdesktop.ejs %>
+        </header>
+        <!-- END HEADER DESKTOP-->
+
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+
+
+                        <!-- END USER DATA-->
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE -->
+                            <h3 class="title-5 m-b-35">Quản lí sản phẩm giang hàng</h3>
+                            <div class="table-data__tool">
+                                <div class="table-data__tool-left">
+                                    <div class="rs-select2--light rs-select2--md">
+                                        <select class="js-select2" name="property">
+                                            <option selected="selected">All Properties</option>
+                                            <option value="">Còn hàng</option>
+                                            <option value="">Hết hàng</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <div class="rs-select2--light rs-select2--sm">
+                                        <select class="js-select2" name="time">
+                                            <option selected="selected">hôm nay</option>
+                                            <option value="">3 ngày</option>
+                                            <option value="">1 tuần</option>
+                                        </select>
+                                        <div class="dropDownSelect2"></div>
+                                    </div>
+                                    <button class="au-btn-filter">
+                                        <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                </div>
+                                <div class="table-data__tool-right">
+                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <i class="zmdi zmdi-plus"></i>Thêm</button>
+                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <i class="zmdi zmdi-plus"></i>Xóa</button>
+                                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                        <i class="zmdi zmdi-plus"></i>Sửa</button>
+
+                                </div>
+                            </div>
+                            <div class="table-responsive table-responsive-data2">
+                                <table class="table table-data2">
+                                    <thead>
+                                    <tr>
+
+                                        <th>Sản phẩm</th>
+                                        <th>Giá nêm yết</th>
+                                        <th>Giá bán</th>
+                                        <th>Trình trạng</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr class="tr-shadow">
+
+
+                                        <td class="desc">Samsung S8 Black</td>
+                                        <td>$300</td>
+                                        <td>$679.00</td>
+                                        <td>
+                                            <span class="status--process">Còn hàng</span>
+                                        </td>
+
+
+
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    <tr class="tr-shadow">
+
+
+                                        <td class="desc">iPhone X 64Gb Grey</td>
+                                        <td>$888</td>
+                                        <td>$999.00</td>
+                                        <td>
+                                            <span class="status--process">Còn hàng</span>
+                                        </td>
+
+
+
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    <tr class="tr-shadow">
+
+
+                                        <td class="desc">iPhone X 256Gb Black</td>
+                                        <td>$300</td>
+                                        <td>$1199.00</td>
+                                        <td>
+                                            <span class="status--denied">Hết hàng</span>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr class="spacer"></tr>
+                                    <tr class="tr-shadow">
+
+
+                                        <td class="desc">Camera C430W 4k</td>
+                                        <td>$400</td>
+                                        <td>$699.00</td>
+                                        <td>
+                                            <span class="status--process">Còn hàng</span>
+                                        </td>
+
+
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- END DATA TABLE -->
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="copyright">
+                            <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Jquery JS-->
+<% include partials/jqueryScript.ejs %>
+
+</body>
+
+</html>
+<!-- end document-->

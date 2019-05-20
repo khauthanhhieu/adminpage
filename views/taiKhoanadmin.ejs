@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<title>Dashboard</title>
+	<% include partials/headadmin.ejs %>
+
+</head>
+
+<body class="animsition">
+	<div class="page-wrapper">
+		<!-- HEADER MOBILE-->
+		<header class="header-mobile d-block d-lg-none">
+			<% include partials/headeradmin.ejs %>
+		</header>
+		<!-- END HEADER MOBILE-->
+
+		<!-- MENU SIDEBAR-->
+		<aside class="menu-sidebar d-none d-lg-block">
+			<% include partials/menusidebar.ejs %>
+		</aside>
+		<!-- END MENU SIDEBAR-->
+
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<header class="header-desktop">
+				<% include partials/headdesktop.ejs %>
+			</header>
+			<!-- HEADER DESKTOP-->
+
+			<!-- MAIN CONTENT-->
+			<div class = "main-content">
+				
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h6 class="title-1 m-b-25">quản lý tài khoản khách hàng</h6>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="js-item-menu">
+                                    <button class="au-btn btn-primary active">
+                                        <i class="zmdi zmdi-plus"></i>Thêm
+                                    </button>
+                                    <div class="mess-dropdown js-dropdown">
+                                        <!-- THÊM TÀI KHOẢN -->
+                                        <div class="card">
+                                            <div class="card-header">Thêm tài khoản</div>
+                                            <div class="card-body">
+
+                                                <form action="" method="post" novalidate="novalidate">
+
+                                                    <div class="form-group">
+                                                        <label for="cc-payment" class="control-label mb-1">Họ tên</label>
+                                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="Nguyễn Văn A" autocomplete="cc-exp">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="cc-payment" class="control-label mb-1">Số điện thoại</label>
+                                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="012345678x" autocomplete="cc-exp">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="cc-payment" class="control-label mb-1">Email</label>
+                                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="nva@gmail.com" autocomplete="cc-exp">
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label for="cc-payment" class="control-label mb-1">Tên tài khoản</label>
+                                                        <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" placeholder="nva9669" autocomplete="cc-exp">
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="form-group">
+                                                                <label for="cc-exp" class="control-label mb-1">Mật khẩu</label>
+                                                                <input id="cc-exp" name="cc-exp" type="password" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration"
+                                                                    data-val-cc-exp="Please enter a valid month and year"
+                                                                    autocomplete="cc-exp">
+                                                                <span class="help-block" data-valmsg-for="cc-exp" data-valmsg-replace="true"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <label for="x_card_code" class="control-label mb-1">Lặp lại mk</label>
+                                                            <div class="input-group">
+                                                                <input id="x_card_code" name="x_card_code" type="password" class="form-control cc-cvc" value="" data-val="true" data-val-required="Please enter the security code"
+                                                                    data-val-cc-cvc="Please enter a valid security code" autocomplete="off">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                                            <i class="fas fa-paper-plane"></i>&nbsp;
+                                                            <span id="payment-button-amount">Tạo</span>
+                                                            <span id="payment-button-sending" style="display:none;">Sending…</span>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- KẾT THÚC THÊM TÀI KHOẢN -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2">
+                            <!--  SỬA TÀI KHOẢN -->
+
+                                <div class="js-item-menu">
+                                    <button type="button" class="au-btn btn-success active">
+                                        <i class="fas fa-edit"></i> Sửa
+                                    </button>
+                                    <div class="mess-dropdown js-dropdown">
+                                        <div class="card">
+                                            <div class="card-header">Cập nhật tài khoản</div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="cc-payment" class="control-label mb-1">Nhập ID tài khoản</label>
+                                                    <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" autocomplete="cc-exp">
+                                                </div>
+                                                <button class="btn-lg btn-primary au-btn" type="submit">Tìm</button>
+                                                <hr>
+
+                                                <div class="form-group">
+                                                    <label for="cc-payment" class="control-label mb-1">Nhập tài khoản</label>
+                                                    <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" autocomplete="cc-exp" >
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="cc-payment" class="control-label mb-1">Nhập mật khẩu</label>
+                                                    <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" autocomplete="cc-exp">
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="cc-payment" class="control-label mb-1">Nhập lại mật khẩu</label>
+                                                    <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" autocomplete="cc-exp">
+
+                                                </div>
+                                                <button class="btn-lg btn-primary au-btn" type="submit">Cập nhật</button>
+
+                                                 
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- KẾT THÚC SỬA TÀI KHOẢN -->
+                            <div class="col-lg-2">
+
+                                <div class="js-item-menu">
+                                    <button type="button" class="au-btn btn-danger active">
+                                        <i class="far fa-trash-alt"></i> Xóa
+                                    </button>
+                                    <div class="account-dropdown js-dropdown">
+                                        <div class="card">
+                                            <div class="card-header">Xóa tài khoản</div>
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label for="cc-payment" class="control-label mb-1">Nhập ID tài khoản</label>
+                                                    <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" autocomplete="cc-exp">
+                                                </div>
+                                                <button class="btn-lg btn-primary au-btn" type="submit">Tìm</button>
+                                                <hr>
+
+                                                <div class="form-group">
+                                                    <label for="cc-payment" class="control-label mb-1">Tên tài khoản</label>
+                                                    <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" autocomplete="cc-exp" >
+
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="cc-payment" class="control-label mb-1">Mật khẩu</label>
+                                                    <input id="cc-exp" name="cc-exp" type="tel" class="form-control cc-exp" value="" data-val="true" data-val-required="Please enter the card expiration" data-val-cc-exp="Please enter a valid month and year" autocomplete="cc-exp">
+
+                                                </div>
+                                                <button class="btn-lg btn-primary au-btn" type="submit">Xóa</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-12">
+
+                                <!-- TABLE -->
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>ngày tạo</th>
+                                                <th>id tài khoản</th>
+                                                <th>tài khoản</th>
+                                                <th>mật khẩu</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>2018-09-29 05:57</td>
+                                                <td>100398</td>
+                                                <td>duongkhang98</td>
+                                                <td>khang0123456789</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-28 01:22</td>
+                                                <td>100397</td>
+                                                <td>khauhieu00</td>
+                                                <td>hieukhau9876543210</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-27 02:12</td>
+                                                <td>100396</td>
+                                                <td>huynguyen9999</td>
+                                                <td>huy789456123</td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-26 23:06</td>
+                                                <td>100395</td>
+                                                <td>cothienlac87</td>
+                                                <td>pass123456</td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-25 19:03</td>
+                                                <td>100393</td>
+                                                <td>taikhoan1</td>
+                                                <td>matkhau1</td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-29 05:57</td>
+                                                <td>100392</td>
+                                                <td>taikhoan2</td>
+                                                <td>matkhau2</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-24 19:10</td>
+                                                <td>100391</td>
+                                                <td>taikhoan3</td>
+                                                <td>matkhau3</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td>2018-09-22 00:43</td>
+                                                <td>100393</td>
+                                                <td>taikhoan4</td>
+                                                <td>matkhau4</td>
+                                                
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END TABLE -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+			</div>
+		</div>
+	</div>
+	<!-- Jquery JS-->
+	<% include partials/jqueryScript.ejs %>
+</body>
+
+</html>
+<!-- end document-->
