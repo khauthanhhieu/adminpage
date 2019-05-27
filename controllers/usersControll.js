@@ -14,7 +14,8 @@ exports.getCreate = function(req, res) {
     res.render('createUser', { title: 'Express'});
 }
 exports.create = function (req, res, next) {
-    var sql = `INSERT INTO users(username) VALUES (?)`;
+    var sql = `INSERT INTO users VALUES (?)`;
+    console.log('day ne: ', req.body.username)
     var data = [req.body.username, req.body.password,req.body.fullname,req.body.email,req.body.phonenumber,req.body.date,req.body.address];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {
@@ -50,6 +51,7 @@ exports.getEdit = function(req, res) {
 exports.postEdit = function(req, res) {
     var sql = `UPDATE users SET username=?, password=?, fullname=?, tel=?, email=?, birthday=?, address=?  WHERE id=?`;
 
+    console.log('log here: ', req.body.txtUsername)
     var data = [req.body.txtUsername, req.body.txtPass,req.body.txtFullName,req.body.txtPhone,req.body.txtEmail,req.body.txtDate,req.body.txtAddress,req.params.id];
 
     console.log(req.body.txtFullName);

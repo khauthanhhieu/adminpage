@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<title>Dashboard</title>
+	<% include partials/headadmin.ejs %>
+
+</head>
+
+<body class="animsition">
+<div class="page-wrapper">
+	<!-- HEADER MOBILE-->
+	<header class="header-mobile d-block d-lg-none">
+		<% include partials/headeradmin.ejs %>
+	</header>
+	<!-- END HEADER MOBILE-->
+
+	<!-- MENU SIDEBAR-->
+	<aside class="menu-sidebar d-none d-lg-block">
+		<% include partials/menusidebar.ejs %>
+	</aside>
+	<!-- END MENU SIDEBAR-->
+
+	<!-- PAGE CONTAINER-->
+	<div class="page-container">
+		<!-- HEADER DESKTOP-->
+		<header class="header-desktop">
+			<% include partials/headdesktop.ejs %>
+		</header>
+		<!-- HEADER DESKTOP-->
+
+        <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="au-card recent-report">
+                                    <div class="au-card-inner">
+                                        <h3 class="title-2">Nhập thông sản phẩm</h3>
+                                        <form method="POST">
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">Tên sản phẩm</label>
+                                                <input id="txtProductName" name="txtProductName" type="text" class="form-control cc-exp"  autocomplete="cc-exp" value="<%= cItem.name %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">id loại hàng hóa</label>
+                                                <input id="txtCid" name="txtCid" type="number" class="form-control cc-exp"  autocomplete="cc-exp" value="<%= cItem.cid %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">Giá niêm yết</label>
+                                                <input id="numberCost" name="numberCost" type="text" class="form-control cc-exp"  autocomplete="cc-exp" value="<%= cItem.cost %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">Giá bán</label>
+                                                <input id="numberPrice" name="numberPrice" type="text" class="form-control cc-exp" autocomplete="cc-exp" value="<%= cItem.price %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">Đường dẫn ảnh</label>
+                                                <input id="txtLinkImage" name="txtLinkImage" type="text" class="form-control cc-exp"  autocomplete="cc-exp" value="<%= cItem.path_picture %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">Quốc gia</label>
+                                                <input id="txtCountry" name="txtCountry" type="text" class="form-control cc-exp" autocomplete="cc-exp" value="<%= cItem.orgin %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">Nhà sản xuất</label>
+                                                <input id="txtProductor" name="txtProductor" type="text" class="form-control cc-exp" autocomplete="cc-exp" value="<%= cItem.productor %>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="control-label mb-1">Số lượng</label>
+                                                <input id="numberQuantity" name="numberQuantity" type="text" class="form-control cc-exp" autocomplete="cc-exp" value="<%= cItem.quantity %>">
+                                                <%console.log('so luong ne: ', cItem.quantity)%>
+                                            </div>
+                                             <div class="form-group">
+                                                <label class="control-label mb-1">Mô tả</label>
+                                                <input id="txtDescs" name="txtDescs" type="text" class="form-control cc-exp" autocomplete="cc-exp" value="<%= cItem.descr %>">
+                                            </div>
+
+
+                                            <div>
+                                                <button id="payment-button" class="btn btn-lg btn-info btn-block">
+                                                    <i class="fas fa-paper-plane"></i>
+                                                    <span id="payment-button-amount">Xóa</span>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+		<!-- END PAGE CONTAINER-->
+	</div>
+
+</div>
+
+<!-- Jquery JS-->
+<% include partials/jqueryScript.ejs %>
+
+</body>
+
+</html>
+<!-- end document-->

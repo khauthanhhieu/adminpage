@@ -10,6 +10,7 @@ exports.Product = function(){
         productor : String,
         date : Date,
         quantity : Number,
-        descr : String
+        descr : String,
+        isdelete: Boolean,
     }
 }
