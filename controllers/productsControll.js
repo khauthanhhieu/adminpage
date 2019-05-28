@@ -7,7 +7,6 @@ exports.loadPage = function(req, res) {
 	conn.query(sql, function (err, products, fields){
 		if (err) throw err;
 		res.render('products', {title : 'Express', uList: products });
-
 	});
 };
 
