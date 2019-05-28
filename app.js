@@ -1,44 +1,13 @@
 var createError = require('http-errors');
 var express = require('express');
+
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var conn = require('./controllers/connection');
 var passport = require('passport')
-  , LocalStrategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy(
-  {
-    usernameField: 'Username',
-    passwordField: 'Password',
-    passReqToCallback: true //passback entire req to call back
-  }, function (req, username, password, done) {
-    if (!username || !password) {
-      console.log("login fail");
-      return done(null, false);
-    }
-    conn.query("select * from admins where username = ?", [username], function (err, rows) {
-      console.log(err);
-      console.log(rows);
-      if (err) {
-        console.log("login fail");
-        return done();
-      }
-      if (!rows.length) {
-        console.log("login fail");
-        return done(null, false);
-      }
-
-      var dbPassword = rows[0].password;
-      if (!(dbPassword == passport)) {
-        console.log("login fail");
-        return done(null, false);
-      }
-      console.log("login success");
-      return done(null, rows[0]);
-    });
-  }
-));
 
 
 var indexRouter = require('./routes/index');
@@ -49,6 +18,7 @@ var productRouter = require('./routes/products');
 var statisticsRouter = require('./routes/statistics');
 var orderRouter = require('./routes/orders');
 var loginRouter = require('./routes/login');
+const session=require('express-session');
 var app = express();
 
 // view engine setup
@@ -60,6 +30,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret:"mysecret" }))
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -69,11 +43,43 @@ app.use('/products', productRouter);
 app.use('/statistics', statisticsRouter);
 app.use('/orders', orderRouter);
 app.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
+  passport.authenticate ('local', { successRedirect: '/home',
                                    failureRedirect: '/login'})
 );
 app.use('/login', loginRouter);
+passport.use(new LocalStrategy((username,password,done)=>
+  {
+    console.log(username)
+    conn.query('SELECT * FROM admins WHERE username = ?',username, function (err, users) {
+      if (err) throw err;
+      console.log(users[0].password)
+      if(users[0] && users[0].password===password)
+     {
+        return done(null,users[0])
+      }else{
+        return done(null,false)
+      }
+      
+    })
+    
+  }
+));
+passport.serializeUser((user,done)=>{
+  done(null,user.username);
 
+})
+passport.deserializeUser((name,done)=>{
+  
+conn.query('SELECT * FROM admins WHERE username = ?',name, function (err, users) {
+  if (err) throw err;
+  if(users[0]){
+    return done(null,users[0])
+  }else{
+    return done(null,false)
+  }
+})
+
+})
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
