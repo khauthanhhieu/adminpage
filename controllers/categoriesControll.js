@@ -25,7 +25,7 @@ exports.create = function (req, res, next) {
 
 exports.delete = function (req, res, next) {
 	//var sql = `DELETE FROM categories WHERE id=?`;
-	var sql = `UPDATE categories SET isdetele=1 WHERE id=?`;
+	var sql = `UPDATE categories SET isdelete=1 WHERE id=?`;
 	var data = [req.params.id];
 	conn.query(sql, data, (err, results, fields) => {
 		if (err) {

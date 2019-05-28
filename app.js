@@ -8,9 +8,8 @@ var conn = require('./controllers/connection');
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
 
-
-
 var indexRouter = require('./routes/index');
+var adminRouter = require('./routes/admins');
 var usersRouter = require('./routes/users');
 var homeRouter = require('./routes/home');
 var categoryRouter = require('./routes/categories');
@@ -37,6 +36,7 @@ app.use(passport.session())
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/admins', adminRouter);
 app.use('/home', homeRouter);
 app.use('/categories', categoryRouter);
 app.use('/products', productRouter);

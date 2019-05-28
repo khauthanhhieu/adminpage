@@ -10,14 +10,22 @@
                 <a href="/">
                     <i class="fas fa-tachometer-alt"></i>Doashboard</a>
             </li>
-            <li>
-                <a href="/users">
-                    <i class="fas fa-users"></i>Quản lý người dùng</a>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-users"></i>Quản lý tài khoản</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                    <li>
+                        <a href="/users">Quản lý khách hàng</a>
+                    </li>
+                    <li>
+                        <a href="/admins">Quản lý quản trị viên</a>
+                    </li>
+                </ul>
             </li>
-			<li>
-				<a class="js-arrow" href="#">
-				   <i class="fas fa-shopping-cart"></i>Quản lý hàng</a>
-				<ul class="list-unstyled navbar__sub-list js-sub-list">
+            <li>
+                <a class="js-arrow" href="#">
+                    <i class="fas fa-shopping-cart"></i>Quản lý hàng</a>
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
 					<li>
 						<a href="/categories">Quản lý loại sản phẩm</a>
 					</li>

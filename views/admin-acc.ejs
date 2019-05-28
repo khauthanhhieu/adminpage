@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Dashboard</title>
+    <% include partials/headadmin.ejs %>
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <% include partials/headeradmin.ejs %>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <% include partials/menusidebar.ejs %>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <% include partials/headdesktop.ejs %>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <h6 class="title-1 m-b-25">quản lý tài khoản quản trị</h6>
+                            </div>
+                            <div class="col-lg-2">
+                                <a href="/admins/create">
+                                    <button class="au-btn btn-primary active">
+                                        <i class="zmdi zmdi-plus"></i> Thêm
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-12">
+
+                                <!-- TABLE -->
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Họ và tên</th>
+                                                <th>Username</th>
+                                                <th>Quyền hạn</th>
+                                                <th>Thao tác</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% aList.forEach(function(aItem) { %>
+                                            <tr>
+                                                <td><%= aItem.id %></td>
+                                                <td><%= aItem.fullname %></td>
+                                                <td><%= aItem.username %></td>
+                                                <td></td>
+                                                <td>
+                                                    <a href="/admins/edit/<%= aItem.id %>"
+                                                        class="au-btn btn-success">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                    <a href="/admins/delete/<%= aItem.id %>" class="au-btn btn-danger">
+                                                        <i class="far fa-trash-alt"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END TABLE -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jquery JS-->
+    <% include partials/jqueryScript.ejs %>
+</body>
+
+</html>
+<!-- end document-->
