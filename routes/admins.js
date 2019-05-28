@@ -9,4 +9,6 @@ router.post('/create', admins_controller.postCreate);
 
 router.get('/delete/:id', admins_controller.delete);
 
+router.get('/detail/:id', admins_controller.details);
+
 module.exports = router;

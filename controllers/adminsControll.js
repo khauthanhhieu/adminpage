@@ -54,3 +54,15 @@ exports.delete = function (req, res, next) {
     });
     res.redirect('../');
 }
+
+exports.details = function (req, res, next) {
+    var sql = `SELECT * FROM admins WHERE id=?`;
+    var data = [req.params.id];
+    conn.query(sql, data, (err, results, fields) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log(results[0]);
+        res.render('detailAdmin', { title: 'Express', aItem : results[0] });
+    });
+}

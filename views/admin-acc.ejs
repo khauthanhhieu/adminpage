@@ -70,13 +70,10 @@
                                                 <td><%= aItem.username %></td>
                                                 <td></td>
                                                 <td>
-                                                    <a href="/admins/edit/<%= aItem.id %>"
-                                                        class="au-btn btn-success">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
                                                     <a href="/admins/delete/<%= aItem.id %>" class="au-btn btn-danger">
                                                         <i class="far fa-trash-alt"></i>
                                                     </a>
+                                                    <a href="/admins/detail/<%= aItem.id %>">Xem chi tiết</a>
                                                 </td>
                                             </tr>
                                             <% }); %>
