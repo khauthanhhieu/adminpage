@@ -14,9 +14,8 @@ exports.getCreate = function(req, res) {
     res.render('createUser', { title: 'Express'});
 }
 exports.create = function (req, res, next) {
-    var sql = `INSERT INTO users VALUES (?)`;
-    console.log('day ne: ', req.body.username)
-    var data = [req.body.username, req.body.password,req.body.fullname,req.body.email,req.body.phonenumber,req.body.date,req.body.address];
+    var sql = `INSERT INTO users(username, password,fullname, email, tel, birthday, address ) VALUES (?,?,?,?,?,?,?)`;
+    var data = [req.body.txtUsername, req.body.txtPass,req.body.txtFullName,req.body.txtEmail,req.body.txtPhone,req.body.txtDate,req.body.txtAddress];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {
             return console.error(err.message);
