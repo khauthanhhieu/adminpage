@@ -3,6 +3,43 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var conn = require('./controllers/connection');
+var passport = require('passport')
+  , LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  {
+    usernameField: 'Username',
+    passwordField: 'Password',
+    passReqToCallback: true //passback entire req to call back
+  }, function (req, username, password, done) {
+    if (!username || !password) {
+      console.log("login fail");
+      return done(null, false);
+    }
+    conn.query("select * from admins where username = ?", [username], function (err, rows) {
+      console.log(err);
+      console.log(rows);
+      if (err) {
+        console.log("login fail");
+        return done();
+      }
+      if (!rows.length) {
+        console.log("login fail");
+        return done(null, false);
+      }
+
+      var dbPassword = rows[0].password;
+      if (!(dbPassword == passport)) {
+        console.log("login fail");
+        return done(null, false);
+      }
+      console.log("login success");
+      return done(null, rows[0]);
+    });
+  }
+));
+
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -31,15 +68,19 @@ app.use('/categories', categoryRouter);
 app.use('/products', productRouter);
 app.use('/statistics', statisticsRouter);
 app.use('/orders', orderRouter);
+app.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/login'})
+);
 app.use('/login', loginRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
