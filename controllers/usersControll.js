@@ -14,7 +14,7 @@ exports.getCreate = function(req, res) {
     res.render('createUser', { title: 'Express'});
 }
 exports.create = function (req, res, next) {
-    var sql = `INSERT INTO users(username, password,fullname, email, tel, birthday, address ) VALUES (?,?,?,?,?,?,?)`;
+    var sql = `INSERT INTO users(username, password, fullname, email, tel, birthday, address ) VALUES (?,?,?,?,?,?,?)`;
     var data = [req.body.txtUsername, req.body.txtPass,req.body.txtFullName,req.body.txtEmail,req.body.txtPhone,req.body.txtDate,req.body.txtAddress];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {
@@ -26,8 +26,7 @@ exports.create = function (req, res, next) {
 
 exports.delete = function (req, res, next) {
     //var sql = `DELETE FROM categories WHERE id=?`;
-    var sql = `UPDATE users SET isdetele=1 WHERE id=?`;
-
+    var sql = `UPDATE users SET isdelete=1 WHERE id=?`;
     var data = [req.params.id];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {

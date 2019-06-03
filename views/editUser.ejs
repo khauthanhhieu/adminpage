@@ -40,28 +40,23 @@
                                         <h3 class="title-2 m-b-25">Nhập thông tin người dùng (id = <%= uItem.id %>)</h3>
                                         <form action="./<%= uItem.id %>" method="POST">
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Tên người dùng</label>
-                                                <input id="txtFullName" name="txtFullName" type="text" class="form-control cc-exp" value="<%= uItem.fullname %>" placeholder="Nhập tên người dùng..." autocomplete="cc-exp">
+                                                <input id="txtFullName" name="txtFullName" type="text" class="form-control cc-exp" value="<%= uItem.fullname %>" placeholder="Họ và tên" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Số điện thoại</label>
-                                                <input id="txtPhone" name="txtPhone" type="number" class="form-control cc-exp" value="<%= uItem.tel %>" placeholder="Nhập số điện thoại..." autocomplete="cc-exp">
+                                                <input id="txtPhone" name="txtPhone" type="tel" class="form-control cc-exp" value="<%= uItem.tel %>" placeholder="Số điện thoại" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Email</label>
-                                                <input id="txtEmail" name="txtEmail" type="tel" class="form-control cc-exp" value="<%= uItem.email %>" placeholder="Nhập tên người dùng..." autocomplete="cc-exp">
+                                                <input id="txtEmail" name="txtEmail" type="email" class="form-control cc-exp" value="<%= uItem.email %>" placeholder="Email" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label mb-1">Ngày sinh</label>
-                                                <input id="txtdate" name="txtdate" type="date" class="form-control cc-exp" value="<%= uItem.birth %>">
+                                                <input id="txtdate" name="txtDate" type="date" class="form-control cc-exp" value="<%= uItem.birth %>">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Địa chỉ</label>
-                                                <input id="txtAddress" name="txtAddress" type="text" class="form-control cc-exp" value="<%= uItem.address %>" placeholder="Nhập địa chỉ..." autocomplete="cc-exp">
+                                                <input id="txtAddress" name="txtAddress" type="text" class="form-control cc-exp" value="<%= uItem.address %>" placeholder="Địa chỉ" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Tên tài khoản</label>
-                                                <input id="txtUsername" name="txtUsername" type="text" class="form-control cc-exp" value="<%= uItem.username %>" placeholder="Nhập tên tài khoản..." autocomplete="cc-exp">
+                                                <input id="txtUsername" name="txtUsername" type="text" class="form-control cc-exp" value="<%= uItem.username %>" placeholder="Username" autocomplete="cc-exp">
                                             </div>
                                             <div>
                                                 <button id="payment-button" class="btn btn-lg btn-info btn-block">

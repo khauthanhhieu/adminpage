@@ -40,36 +40,35 @@
                                         <h3 class="title-2 m-b-25">Nhập thông tin sản phẩm</h3>
                                         <form method="POST">
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Tên sản phẩm</label>
-                                                <input id="txtProductName" name="txtProductName" type="text" class="form-control cc-exp"  autocomplete="cc-exp">
+                                                <input id="txtProductName" name="txtProductName" placeholder="Tên sản phẩm" type="text" class="form-control cc-exp"  autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">id loại hàng hóa</label>
-                                                <input id="txtCid" name="txtCid" type="number" class="form-control cc-exp"  autocomplete="cc-exp">
+                                                <select id="txtCid" name="txtCid" class="form-control m-b-20">
+                                                    <option>Loại sản phẩm...</option>
+											        <% cList.forEach(function(cItem) { %>
+                                                        <option value="<%= cItem.id %>">
+                                                            <%= cItem.name %>
+                                                        </option>
+                                                    <% }); %>
+                                                </section>
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Giá niêm yết</label>
-                                                <input id="numberCost" name="numberCost" type="text" class="form-control cc-exp"  autocomplete="cc-exp">
+                                                <input id="numberCost" name="numberCost" type="text" placeholder="Giá gốc" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Giá bán</label>
-                                                <input id="numberPrice" name="numberPrice" type="text" class="form-control cc-exp" autocomplete="cc-exp">
+                                                <input id="numberPrice" name="numberPrice" type="text" placeholder="Giá bán" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Đường dẫn ảnh</label>
-                                                <input id="txtLinkImage" name="txtLinkImage" type="text" class="form-control cc-exp"  autocomplete="cc-exp">
+                                                <input id="txtLinkImage" name="txtLinkImage" type="text" placeholder="Ảnh minh họa" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Quốc gia</label>
-                                                <input id="txtCountry" name="txtCountry" type="text" class="form-control cc-exp" autocomplete="cc-exp">
+                                                <input id="txtCountry" name="txtCountry" type="text" placeholder="Xuất xứ (quốc gia)" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Nhà sản xuất</label>
-                                                <input id="txtProductor" name="txtProductor" type="text" class="form-control cc-exp" autocomplete="cc-exp">
+                                                <input id="txtProductor" name="txtProductor" type="text" placeholder="Nhà sản xuất" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <label class="control-label mb-1">Số lượng</label>
-                                                <input id="numberQuantity" name="numberQuantity" type="text" class="form-control cc-exp" value="" autocomplete="cc-exp">
+                                                <input id="numberQuantity" name="numberQuantity" type="text" placeholder="Số lượng" class="form-control cc-exp" value="" autocomplete="cc-exp">
                                             </div>
                                              <div class="form-group">
                                                 <label class="control-label mb-1">Mô tả</label>

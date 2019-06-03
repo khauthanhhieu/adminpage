@@ -11,7 +11,11 @@ exports.loadPage = function(req, res) {
 };
 
 exports.getAdd = function(req, res) {
-	res.render('addProduct', {title : 'Express'});
+	var sql = "SELECT * FROM categories WHERE isdelete=0";
+	conn.query(sql, function (err, categories, fields){
+		if (err) throw err;
+		res.render('addProduct', {title : 'Express', cList: categories });
+	});
 };
 
 exports.add = function(req, res, next) {
@@ -29,14 +33,17 @@ exports.add = function(req, res, next) {
 }
 
 exports.getEdit = function(req, res) {
-	var id = req.params.id
-	var sql = 'SELECT * FROM products WHERE id=?'
-	console.log('id ne: ', id)
-
-	conn.query(sql, id, function(err, product, fields){
-		if (err) throw err;
-		res.render('editProduct', {title : 'Express', cItem : product[0]});
-	});
+	var sql1 = `SELECT * FROM categories WHERE isdelete=0`;
+    conn.query(sql1, function(err, categories, fields){
+        if (err) throw err;
+		
+		var sql = 'SELECT * FROM products WHERE id=?'
+		var id = req.params.id
+		conn.query(sql, id, function(err, product, fields){
+			if (err) throw err;
+			res.render('editProduct', {title : 'Express', cList : categories, pItem : product[0]});
+		});
+    });
 }
 
 exports.edit = function(req, res, next) {
