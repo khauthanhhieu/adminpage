@@ -39,10 +39,11 @@ exports.delete = function (req, res, next) {
 
 exports.getEdit = function(req, res) {
     var id = req.params.id;
-    var sql = `SELECT * FROM users WHERE id=?`;
+    var sql = `SELECT *, DATE_FORMAT(birthday, "%Y-%m-%d") as birth FROM users WHERE id=?`;
     conn.query(sql, id, function (err, users, fields) {
         if (err) throw err;
-        res.render('editUser', { title: 'Express', cItem: users[0] });
+        res.render('editUser', { title: 'Express', uItem: users[0] });
+        console.log(users[0])
         //res.end();
     });
 }

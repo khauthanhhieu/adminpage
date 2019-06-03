@@ -37,41 +37,32 @@
                             <div class="col-lg-12">
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
-                                        <h3 class="title-2">Nhập thông tin người dùng (id = <%= cItem.id %>)</h3>
-                                        <form action="./<%= cItem.id %>" method="POST">
+                                        <h3 class="title-2 m-b-25">Nhập thông tin người dùng (id = <%= uItem.id %>)</h3>
+                                        <form action="./<%= uItem.id %>" method="POST">
                                             <div class="form-group">
                                                 <label class="control-label mb-1">Tên người dùng</label>
-                                                <input id="txtFullName" name="txtFullName" type="text" class="form-control cc-exp" value="<%= cItem.fullname %>" placeholder="Nhập tên người dùng..." autocomplete="cc-exp">
+                                                <input id="txtFullName" name="txtFullName" type="text" class="form-control cc-exp" value="<%= uItem.fullname %>" placeholder="Nhập tên người dùng..." autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label mb-1">Số điện thoại</label>
-                                                <input id="txtPhone" name="txtPhone" type="number" class="form-control cc-exp" value="<%= cItem.tel %>" placeholder="Nhập số điện thoại..." autocomplete="cc-exp">
+                                                <input id="txtPhone" name="txtPhone" type="number" class="form-control cc-exp" value="<%= uItem.tel %>" placeholder="Nhập số điện thoại..." autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label mb-1">Email</label>
-                                                <input id="txtEmail" name="txtEmail" type="tel" class="form-control cc-exp" value="<%= cItem.email %>" placeholder="Nhập tên người dùng..." autocomplete="cc-exp">
+                                                <input id="txtEmail" name="txtEmail" type="tel" class="form-control cc-exp" value="<%= uItem.email %>" placeholder="Nhập tên người dùng..." autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label mb-1">Ngày sinh</label>
-                                                <input id="txtdate" name="txtdate" type="date" class="form-control cc-exp" value="<%= cItem.birthday %>" placeholder="Nhập ngày sinh..." autocomplete="cc-exp">
+                                                <input id="txtdate" name="txtdate" type="date" class="form-control cc-exp" value="<%= uItem.birth %>">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label mb-1">Địa chỉ</label>
-                                                <input id="txtAddress" name="txtAddress" type="text" class="form-control cc-exp" value="<%= cItem.address %>" placeholder="Nhập địa chỉ..." autocomplete="cc-exp">
+                                                <input id="txtAddress" name="txtAddress" type="text" class="form-control cc-exp" value="<%= uItem.address %>" placeholder="Nhập địa chỉ..." autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
                                                 <label class="control-label mb-1">Tên tài khoản</label>
-                                                <input id="txtUsername" name="txtUsername" type="text" class="form-control cc-exp" value="<%= cItem.username %>" placeholder="Nhập tên tài khoản..." autocomplete="cc-exp">
+                                                <input id="txtUsername" name="txtUsername" type="text" class="form-control cc-exp" value="<%= uItem.username %>" placeholder="Nhập tên tài khoản..." autocomplete="cc-exp">
                                             </div>
-                                            <div class="form-group">
-                                                <label class="control-label mb-1">Mật khẩu</label>
-                                                <input id="txtPass" name="txtPass" type="password" class="form-control cc-exp" value="<%= cItem.password %>" placeholder="Nhập mật khẩu..." autocomplete="cc-exp">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="control-label mb-1">Lặp lại mật khẩu</label>
-                                                <input id="txtrePass" name="txtrePass" type="password" class="form-control cc-exp" value="" placeholder="Nhập lại mật khẩu..." autocomplete="cc-exp">
-                                            </div>
-
                                             <div>
                                                 <button id="payment-button" class="btn btn-lg btn-info btn-block">
                                                     <i class="fas fa-paper-plane"></i>
@@ -83,7 +74,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>

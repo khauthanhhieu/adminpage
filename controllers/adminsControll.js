@@ -56,7 +56,7 @@ exports.delete = function (req, res, next) {
 }
 
 exports.details = function (req, res, next) {
-    var sql = `SELECT * FROM admins WHERE id=?`;
+    var sql = `SELECT *, DATE_FORMAT(birthday, "%d/%m/%Y") as birth FROM admins WHERE id=?`;
     var data = [req.params.id];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {

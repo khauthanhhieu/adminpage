@@ -67,7 +67,9 @@
                                             <tr>
                                                 <td><%= uItem.id %></td>
                                                 <td><%= uItem.fullname %></td>
-                                                <td><%= uItem.email %></td>
+                                                <td>
+                                                    <span class="block-email"><%= uItem.email %></span>
+                                                </td>
                                                 <td><%= uItem.username %></td>
                                                 <td>
                                                     <a href="/users/edit/<%= uItem.id %>"
