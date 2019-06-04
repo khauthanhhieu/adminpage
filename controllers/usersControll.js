@@ -1,5 +1,5 @@
 var users = require('express');
-
+var md5=require('md5');
 var conn = require('./connection');
 
 exports.loadPage = function (req, res, next) {
@@ -15,7 +15,8 @@ exports.getCreate = function(req, res) {
 }
 exports.create = function (req, res, next) {
     var sql = `INSERT INTO users(username, password, fullname, email, tel, birthday, address ) VALUES (?,?,?,?,?,?,?)`;
-    var data = [req.body.txtUsername, req.body.txtPass,req.body.txtFullName,req.body.txtEmail,req.body.txtPhone,req.body.txtDate,req.body.txtAddress];
+   var password=md5(req.body.txtPass);
+    var data = [req.body.txtUsername, password,req.body.txtFullName,req.body.txtEmail,req.body.txtPhone,req.body.txtDate,req.body.txtAddress];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {
             return console.error(err.message);

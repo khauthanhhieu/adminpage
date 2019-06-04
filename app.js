@@ -19,7 +19,7 @@ var orderRouter = require('./routes/orders');
 var loginRouter = require('./routes/login');
 const session=require('express-session');
 var app = express();
-
+var md51 = require('md5')
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -51,9 +51,11 @@ passport.use(new LocalStrategy((username,password,done)=>
   {
     console.log(username)
     conn.query('SELECT * FROM admins WHERE username = ?',username, function (err, users) {
+      
       if (err) throw err;
+      var res1=md51(password);
       console.log(users[0].password)
-      if(users[0] && users[0].password===password)
+      if(users[0] && users[0].password===res1)
      {
         return done(null,users[0])
       }else{
