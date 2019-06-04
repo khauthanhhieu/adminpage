@@ -52,7 +52,7 @@ passport.use(new LocalStrategy((username,password,done)=>
     console.log(username)
     conn.query('SELECT * FROM admins WHERE username = ?',username, function (err, users) {
       
-      if (err) throw err;
+      if (err) return done(null,false);
       var res1=md51(password);
       console.log(users[0].password)
       if(users[0] && users[0].password===res1)
