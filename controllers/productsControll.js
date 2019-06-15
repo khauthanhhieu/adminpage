@@ -39,19 +39,21 @@ function date2str(x, y) {
 
 exports.add = function(req, res, next) {
 	let form = new formidable.IncomingForm();
-	form.uploadDir = "uploads/";
+	var dir = "public/images/"
+	form.uploadDir = dir + "products/";
 	let newPath;
 	form.parse(req, (err, fields, files) => {
 		if (err) throw err;
+		var now = new Date();
 		console.log(fields);
 		let tmpPath = files.file.path;
-		newPath = form.uploadDir + files.file.name;
+		newPath = form.uploadDir + date2str(now, 'yyyyMMddhhmmss') + '_' + files.file.name;
 		console.log(tmpPath + " -- " + newPath);
 		fs.rename(tmpPath, newPath, (err) => {
 			if (err) throw err;
 		});
-		var date = date2str(new Date(), 'yyyy/MM/dd');
-		var data = [fields.txtCid, fields.txtProductName, fields.numberCost, fields.numberPrice, newPath, fields.txtCountry, fields.txtProductor, date, fields.numberQuantity, fields.txtDescs, 0];
+		var date = date2str(now, 'yyyy/MM/dd');
+		var data = [fields.txtCid, fields.txtProductName, fields.numberCost, fields.numberPrice, newPath.substring(6), fields.txtCountry, fields.txtProductor, date, fields.numberQuantity, fields.txtDescs, 0];
 
 		var sql = 'INSERT INTO products (cid, name, cost, price, path_picture, orgin, productor, date, quantity, descr, isdelete) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 		conn.query(sql, data, (err, results, fields ) =>{
