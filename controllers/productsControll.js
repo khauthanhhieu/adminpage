@@ -1,5 +1,7 @@
 var products = require('express');
 
+let fs = require("fs");
+let formidable = require("formidable");
 var conn = require('./connection');
 exports.loadPage = function(req, res) {
 
@@ -18,18 +20,47 @@ exports.getAdd = function(req, res) {
 	});
 };
 
-exports.add = function(req, res, next) {
-	let day = new Date()
-	day.getFullYear();
-	var data = [req.body.txtCid, req.body.txtProductName, req.body.numberCost, req.body.numberPrice, req.body.txtLinkImage, req.body.txtCountry, req.body.txtProductor, day.getFullYear(), req.body.numberQuantity, req.body.txtDescs, 0];
+function date2str(x, y) {
+    var z = {
+        M: x.getMonth() + 1,
+        d: x.getDate(),
+        h: x.getHours(),
+        m: x.getMinutes(),
+        s: x.getSeconds()
+    };
+    y = y.replace(/(M+|d+|h+|m+|s+)/g, function(v) {
+        return ((v.length > 1 ? "0" : "") + eval('z.' + v.slice(-1))).slice(-2)
+    });
 
-	var sql = 'INSERT INTO products (cid, name, cost, price, path_picture, orgin, productor, date, quantity, descr, isdelete) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
-	conn.query(sql, data, (err, results, fields ) =>{
-		if(err) {
-			return console.err(err.message);
-		}
+    return y.replace(/(y+)/g, function(v) {
+        return x.getFullYear().toString().slice(-v.length)
+    });
+}
+
+exports.add = function(req, res, next) {
+	let form = new formidable.IncomingForm();
+	form.uploadDir = "uploads/";
+	let newPath;
+	form.parse(req, (err, fields, files) => {
+		if (err) throw err;
+		console.log(fields);
+		let tmpPath = files.file.path;
+		newPath = form.uploadDir + files.file.name;
+		console.log(tmpPath + " -- " + newPath);
+		fs.rename(tmpPath, newPath, (err) => {
+			if (err) throw err;
+		});
+		var date = date2str(new Date(), 'yyyy/MM/dd');
+		var data = [fields.txtCid, fields.txtProductName, fields.numberCost, fields.numberPrice, newPath, fields.txtCountry, fields.txtProductor, date, fields.numberQuantity, fields.txtDescs, 0];
+
+		var sql = 'INSERT INTO products (cid, name, cost, price, path_picture, orgin, productor, date, quantity, descr, isdelete) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+		conn.query(sql, data, (err, results, fields ) =>{
+			if(err) {
+				return console.log(err);
+			}
+		});
+		res.redirect('/products');
 	});
-	res.redirect('./');
 }
 
 exports.getEdit = function(req, res) {

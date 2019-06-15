@@ -38,7 +38,7 @@
                                 <div class="au-card recent-report">
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-25">Nhập thông tin sản phẩm</h3>
-                                        <form method="POST">
+                                        <form method="POST" enctype="multipart/form-data">
                                             <div class="form-group">
                                                 <input id="txtProductName" name="txtProductName" placeholder="Tên sản phẩm" type="text" class="form-control cc-exp"  autocomplete="cc-exp">
                                             </div>
@@ -53,13 +53,13 @@
                                                 </section>
                                             </div>
                                             <div class="form-group">
-                                                <input id="numberCost" name="numberCost" type="text" placeholder="Giá gốc" class="form-control cc-exp" autocomplete="cc-exp">
+                                                <input id="numberCost" name="numberCost" type="number" placeholder="Giá gốc" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <input id="numberPrice" name="numberPrice" type="text" placeholder="Giá bán" class="form-control cc-exp" autocomplete="cc-exp">
+                                                <input id="numberPrice" name="numberPrice" type="number" placeholder="Giá bán" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
-                                                <input id="txtLinkImage" name="txtLinkImage" type="text" placeholder="Ảnh minh họa" class="form-control cc-exp" autocomplete="cc-exp">
+                                                <input id="txtLinkImage" name="file" type="file" accept="image/*" placeholder="Ảnh minh họa" class="form-control cc-exp" autocomplete="cc-exp">
                                             </div>
                                             <div class="form-group">
                                                 <input id="txtCountry" name="txtCountry" type="text" placeholder="Xuất xứ (quốc gia)" class="form-control cc-exp" autocomplete="cc-exp">
