@@ -7,10 +7,10 @@ exports.loadPage = function (req, res, next) {
 	if (p == null)
         p = 1;
     
-    var sql = "SELECT * FROM users WHERE isdelete=0 LIMIT 10 OFFSET " + (p - 1)*10;
+    var sql = "SELECT * FROM users LIMIT 10 OFFSET " + (p - 1)*10;
     conn.query(sql, function (err, users, fields) {
         if (err) throw err;
-        var sql1 = "SELECT count(*) as value FROM users WHERE isdelete=0";
+        var sql1 = "SELECT count(*) as value FROM users";
         conn.query(sql1, function (err, count, fields) {
             if (err) throw err;
             res.render('user-acc', { title: 'Express', uList: users, nPage : (count[0].value - 1)/10 + 1 , iPage : p });
@@ -22,7 +22,7 @@ exports.getCreate = function(req, res) {
 }
 exports.create = function (req, res, next) {
     var sql = `INSERT INTO users(username, password, fullname, email, tel, birthday, address ) VALUES (?,?,?,?,?,?,?)`;
-   var password=md5(req.body.txtPass);
+   var password = md5(req.body.txtPass);
     var data = [req.body.txtUsername, password,req.body.txtFullName,req.body.txtEmail,req.body.txtPhone,req.body.txtDate,req.body.txtAddress];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {
@@ -32,9 +32,19 @@ exports.create = function (req, res, next) {
     res.redirect('./');
 }
 
-exports.delete = function (req, res, next) {
-    //var sql = `DELETE FROM categories WHERE id=?`;
+exports.lock = function (req, res, next) {
     var sql = `UPDATE users SET isdelete=1 WHERE id=?`;
+    var data = [req.params.id];
+    conn.query(sql, data, (err, results, fields) => {
+        if (err) {
+            return console.error(err.message);
+        }
+    });
+    res.redirect('../');
+}
+
+exports.unlock = function (req, res, next) {
+    var sql = `UPDATE users SET isdelete=0 WHERE id=?`;
     var data = [req.params.id];
     conn.query(sql, data, (err, results, fields) => {
         if (err) {
