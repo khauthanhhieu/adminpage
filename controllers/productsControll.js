@@ -4,11 +4,16 @@ let fs = require("fs");
 let formidable = require("formidable");
 var conn = require('./connection');
 exports.loadPage = function(req, res) {
-
-	var sql = "SELECT * FROM products WHERE isdelete=0";
+	var p = req.query.p;
+	if (p == null)
+		p = 1;
+	var sql = "SELECT * FROM products WHERE isdelete=0 LIMIT 10 OFFSET " + (p - 1)*10;
 	conn.query(sql, function (err, products, fields){
 		if (err) throw err;
-		res.render('products', {title : 'Express', uList: products });
+		var sql1 = "SELECT count(*) as value FROM products WHERE isdelete=0";
+		conn.query(sql1, function(err, count, fields) {
+			res.render('products', {title : 'Express', uList: products, nPage : (count[0].value)/10 + 1, iPage : p});
+		});
 	});
 };
 

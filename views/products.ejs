@@ -78,11 +78,10 @@
                         <table class="table table-borderless table-striped table-earning">
                             <thead>
                                 <tr>
-                                    <th>Id sản phẩm</th>
+                                    <th>ID</th>
                                     <th>Sản phẩm</th>
                                     <th>Giá nêm yết</th>
                                     <th>Giá bán</th>
-                                    <th>Quốc gia</th>
                                     <th>Nhà sản xuất</th>
                                     <th>Số lượng </th>
                                     <th>Thao tác</th>
@@ -94,12 +93,11 @@
                                 <tr class="spacer"></tr>
                                 <tr>
                                     <td><%= uItem.id %></td>
-                                    <td class="desc"><%= uItem.name%></td>
-                                    <td><%= uItem.cost%></td>
-                                    <td><%= uItem.price%></td>
-                                    <td><%= uItem.orgin%></td>
-                                    <td><%= uItem.productor%></td>
-                                    <td><%= uItem.quantity%></td>
+                                    <td class="desc"><%= uItem.name %></td>
+                                    <td><%= uItem.cost %></td>
+                                    <td><%= uItem.price %></td>
+                                    <td><%= uItem.productor %></td>
+                                    <td><%= uItem.quantity %></td>
                                     <td>
                                         <a href="/products/edit/<%= uItem.id %>"
                                             class="au-btn btn-success">
@@ -120,6 +118,36 @@
                             <!-- END DATA TABLE -->
                         <!-- </div> -->
                     <!-- </div> -->
+                    <div class="row">
+                        <ul class="pagination">
+                            <% if(iPage > 1) { %>
+                                <li class="page-item"> 
+                                    <a class="page-link" href="/products?p=<%= iPage - 1 %>">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a> 
+                                </li>
+                            <% } %>
+                            <% var begin = 1; %>
+                            <% if (begin < iPage - 1) begin = iPage - 1; %>
+                            <% var end = nPage %>
+                            <% if (end > begin + 5) end = begin + 5; %>
+                            <% for(var i = begin; i <= end; i++) { %>
+                                <% if(iPage == i) { %>
+                                    <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
+                                <% } else { %>
+                                    <li class="page-item"><a class="page-link" href="/products?p=<%= i %>"><%= i %></a></li>
+                                <% } %>
+                            <% } %>
+                            <% if (iPage < parseInt(nPage)) { %>
+                                <% console.log(iPage + "<" + nPage) %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/products?p=<%= parseInt(iPage) + 1 %>">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            <% } %>
+                        </ul>
+                    </div>
 
                 </div>
                 <div class="row">
