@@ -12,7 +12,7 @@ exports.loadPage = function(req, res) {
 		if (err) throw err;
 		var sql1 = "SELECT count(*) as value FROM products WHERE isdelete=0";
 		conn.query(sql1, function(err, count, fields) {
-			res.render('products', {title : 'Express', uList: products, nPage : (count[0].value)/10 + 1, iPage : p});
+			res.render('products', {title : 'Express', uList: products, nPage : (count[0].value - 1)/10 + 1, iPage : p});
 		});
 	});
 };

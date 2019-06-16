@@ -3,11 +3,18 @@ var md5=require('md5');
 var conn = require('./connection');
 
 exports.loadPage = function (req, res, next) {
-    var sql = "SELECT * FROM users WHERE isdelete=0";
+    var p = req.query.p;
+	if (p == null)
+        p = 1;
+    
+    var sql = "SELECT * FROM users WHERE isdelete=0 LIMIT 10 OFFSET " + (p - 1)*10;
     conn.query(sql, function (err, users, fields) {
         if (err) throw err;
-        res.render('user-acc', { title: 'Express', uList: users });
-        //res.end();
+        var sql1 = "SELECT count(*) as value FROM users WHERE isdelete=0";
+        conn.query(sql1, function (err, count, fields) {
+            if (err) throw err;
+            res.render('user-acc', { title: 'Express', uList: users, nPage : (count[0].value - 1)/10 + 1 , iPage : p });
+        });
     });
 }
 exports.getCreate = function(req, res) {

@@ -88,6 +88,36 @@
                                 <!-- END TABLE -->
                             </div>
                         </div>
+                        <div class="row">
+                                <ul class="pagination">
+                                    <% if(iPage > 1) { %>
+                                        <li class="page-item"> 
+                                            <a class="page-link" href="/products?p=<%= iPage - 1 %>">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a> 
+                                        </li>
+                                    <% } %>
+                                    <% var begin = 1; %>
+                                    <% if (begin < iPage - 1) begin = iPage - 1; %>
+                                    <% var end = nPage %>
+                                    <% if (end > begin + 5) end = begin + 5; %>
+                                    <% for(var i = begin; i <= end; i++) { %>
+                                        <% if(iPage == i) { %>
+                                            <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
+                                        <% } else { %>
+                                            <li class="page-item"><a class="page-link" href="/users?p=<%= i %>"><%= i %></a></li>
+                                        <% } %>
+                                    <% } %>
+                                    <% if (iPage < parseInt(nPage)) { %>
+                                        <% console.log(iPage + "<" + nPage) %>
+                                        <li class="page-item">
+                                            <a class="page-link" href="/users?p=<%= parseInt(iPage) + 1 %>">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    <% } %>
+                                </ul>
+                            </div>
                     </div>
 
                 </div>
