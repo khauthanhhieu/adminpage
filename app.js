@@ -37,7 +37,7 @@ app.use('/api/user', apiUserRouter);
 
 app.use('/', homeRouter);
 app.use('/users', usersRouter);
-app.use('/logout', homeRouter);
+app.use('/logout', logoutRouter);
 app.use('/admins', adminRouter);
 app.use('/home', homeRouter);
 app.use('/categories', categoryRouter);

@@ -2,7 +2,8 @@
 	<div class="container-fluid">
 		<div class="header-wrap">
 			<form class="form-header" action="" method="POST">
-				<input class="au-input au-input--xl" type="text" name="search" placeholder="Tìm kiếm thông tin &amp; báo cáo..." />
+				<input class="au-input au-input--xl" type="text" name="search"
+					placeholder="Tìm kiếm thông tin &amp; báo cáo..." />
 				<button class="au-btn--submit" type="submit">
 					<i class="zmdi zmdi-search"></i>
 				</button>
@@ -126,7 +127,14 @@
 							<img src="/images/icon/avatar-01.jpg" alt="John Doe" />
 						</div>
 						<div class="content">
-							<a class="js-acc-btn" href="#"><%=user.username%></a>
+							<% var isLogin = (typeof user !== 'undefined' && user != null); %>
+							<% if (!isLogin) { %>
+							<script type="text/javascript">
+								window.location.href = '/login';
+							</script>
+							<% } else { %>
+							<a class="js-acc-btn" href="#"><%= user.fullname %></a>
+							<% } %>
 						</div>
 						<div class="account-dropdown js-dropdown">
 							<div class="info clearfix">
@@ -135,12 +143,14 @@
 										<img src="/images/icon/avatar-01.jpg" alt="John Doe" />
 									</a>
 								</div>
+								<% if (isLogin) { %>
 								<div class="content">
 									<h5 class="name">
-										<a href="#"><%=user.username%></a>
+										<a href="#"><%=user.fullname %></a>
 									</h5>
-									<span class="email"><%=user.username%></span>
+									<span class="email"><%=user.email%></span>
 								</div>
+								<% } %>
 							</div>
 							<div class="account-dropdown__body">
 								<div class="account-dropdown__item">
