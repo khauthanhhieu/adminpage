@@ -1,7 +1,7 @@
 var users = require('express');
 
 var conn = require('./connection');
-
+var md5=require('md5');
 exports.loadPage = function (req, res, next) {
     var sql = "SELECT * FROM admins WHERE isdelete=0";
     conn.query(sql, function (err, admins, fields) {
@@ -31,16 +31,18 @@ exports.postCreate = function (req, res, next) {
         console.log(results);
         if (results.length == 0) {
             var sql = `INSERT INTO admins(fullname, username, password, email, tel, birthday, address) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-            var data = [req.body.fullname, req.body.username, req.body.password, req.body.email, req.body.tel, req.body.birth, req.body.addr];
+            var password=md5(req.body.txtPass);
+            var data = [req.body.fullname, req.body.username, password, req.body.email, req.body.tel, req.body.birth, req.body.addr];
             conn.query(sql, data, (err, results, fields) => {
                 if (err) {
                     return console.error(err.message);
                 }
                 console.log('insert xong');
+                res.redirect('/admins');
             });
-            res.redirect('./');
+           
         }
-        res.redirect('/admins/create?err=1');
+      
     })
 }
 

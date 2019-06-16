@@ -1,7 +1,7 @@
 var users = require('express');
 var md5=require('md5');
 var conn = require('./connection');
-
+const Admin = require('../models/users');
 exports.loadPage = function (req, res, next) {
     var p = req.query.p;
 	if (p == null)
@@ -17,6 +17,11 @@ exports.loadPage = function (req, res, next) {
         });
     });
 }
+exports.check = async (req, res, next) => {
+    const userExist = await Admin.check(req.query.email);
+    res.json(userExist);
+  };
+
 exports.getCreate = function(req, res) {
     res.render('createUser', { title: 'Express'});
 }

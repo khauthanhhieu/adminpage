@@ -5,7 +5,7 @@
 
 	<title>Dashboard</title>
 	<% include partials/headadmin.ejs %>
-
+  
 </head>
 
 <body class="animsition">
@@ -39,6 +39,7 @@
                                     <div class="au-card-inner">
                                         <h3 class="title-2 m-b-25">Nhập thông tin quản trị viên</h3>
                                         <form action="/admins/create" method="POST">
+                                            <div class="ui-state-error" id="error-message"></div>
                                             <div class="form-group">
                                                 <input id="username" name="username" type="text" class="form-control cc-exp" placeholder="Username" autocomplete="cc-exp">
                                             </div>
@@ -85,7 +86,22 @@
 
 <!-- Jquery JS-->
 <% include partials/jqueryScript.ejs %>
-
+<% #extend "scripts" %> 
+    <script>
+        $('#username').keyup(function() {
+            $.getJSON('/api/user/check?username='+$('#username').val(), function (data){
+              if (data) {
+                  $('#error-message').html('Tài khoản đã tồn tại. Vui lòng chọn tài khoản khác.');
+                  $("#payment-button").attr("disabled", true);
+              }
+              else {
+                  $('#error-message').html('');
+                  $("#payment-button").attr("disabled", false);
+              }
+            })
+        });
+    </script>
+<% /extend %>
 </body>
 
 </html>

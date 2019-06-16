@@ -7,7 +7,7 @@ var logger = require('morgan');
 var conn = require('./controllers/connection');
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
-
+var loginRouter = require('./routes/login');
 var indexRouter = require('./routes/index');
 var adminRouter = require('./routes/admins');
 var usersRouter = require('./routes/users');
@@ -16,8 +16,8 @@ var categoryRouter = require('./routes/categories');
 var productRouter = require('./routes/products');
 var statisticsRouter = require('./routes/statistics');
 var orderRouter = require('./routes/orders');
-var loginRouter = require('./routes/login');
-const session=require('express-session');
+const apiUserRouter = require('./routes/api/user');
+const session = require('express-session');
 var app = express();
 var md51 = require('md5')
 // view engine setup
@@ -29,12 +29,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret:"mysecret" }))
+app.use(session({ secret: "mysecret", cookie: { maxAge: 60000 } }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use('/api/user', apiUserRouter);
 
-
-app.use('/', indexRouter);
+//app.use('/', loginRouter);
 app.use('/users', usersRouter);
 app.use('/admins', adminRouter);
 app.use('/home', homeRouter);
@@ -43,45 +43,85 @@ app.use('/products', productRouter);
 app.use('/statistics', statisticsRouter);
 app.use('/orders', orderRouter);
 app.post('/login',
-  passport.authenticate ('local', { successRedirect: '/home',
-                                   failureRedirect: '/login'})
+  passport.authenticate('local', {
+    successRedirect: '/home',
+    failureRedirect: '/login'
+  })
 );
+function checkSignIn(req, res){
+  console.log(req.user.email+"fsdkgkfdgkf")
+  if(req.user){
+   
+     next();     //If session exists, proceed to page
+  } else {
+    res.redirect('/login');
+  }
+}
+app.get('/', checkSignIn, function(req, res){
+  res.render('index.ejs', {user:req.user})
+});
+app.use('/', function(err, req, res, next){
+  if(req.user)
+  res.render('index.ejs', {user:req.user})
+else
+     res.redirect('/login');
+  });
 app.use('/login', loginRouter);
-passport.use(new LocalStrategy((username,password,done)=>
-  {
-    console.log(username)
-    conn.query('SELECT * FROM admins WHERE username = ?',username, function (err, users) {
-      
-      if (err) return done(null,false);
-      var res1=md51(password);
-      console.log(users[0].password)
-      if(users[0] && users[0].password===res1)
-     {
-        return done(null,users[0])
-      }else{
-        return done(null,false)
-      }
-      
-    })
-    
-  }
+passport.use(new LocalStrategy((username, password, done) => {
+  console.log(username)
+  conn.query('SELECT * FROM admins WHERE username = ?', username, function (err, users) {
+
+    if (err) return done(null, false);
+    var res1 = md51(password);
+    console.log(users[0].password)
+    if (users[0] && users[0].password === res1) {
+      return done(null, users[0])
+    } else {
+      return done(null, false)
+    }
+
+  })
+
+}
 ));
-passport.serializeUser((user,done)=>{
-  done(null,user.username);
+passport.serializeUser((user, done) => {
+  done(null, user.username);
 
 })
-passport.deserializeUser((name,done)=>{
-  
-conn.query('SELECT * FROM admins WHERE username = ?',name, function (err, users) {
-  if (err) throw err;
-  if(users[0]){
-    return done(null,users[0])
-  }else{
-    return done(null,false)
-  }
-})
+passport.deserializeUser((name, done) => {
 
+  conn.query('SELECT * FROM admins WHERE username = ?', name, function (err, users) {
+    if (err) throw err;
+    if (users[0]) {
+      return done(null, users[0])
+    } else {
+      return done(null, false)
+    }
+  })
 })
+// ajax
+
+// var blocks = {};
+
+// hbs.registerHelper('extend', function(name, context) {
+//   var block = blocks[name];
+//   if (!block) {
+//     block = blocks[name] = [];
+//   }
+
+//   block.push(context.fn(this)); // for older versions of handlebars, use block.push(context(this));
+// });
+
+// hbs.registerHelper('block', function(name) {
+//   var val = (blocks[name] || []).join('\n');
+
+//   // clear the block
+//   blocks[name] = [];
+//   return val;
+// });
+
+
+
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

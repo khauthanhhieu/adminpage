@@ -7,7 +7,7 @@ router.get('/create',users_controller.getCreate);
 router.post('/create', users_controller.create);
 router.get('/lock/:id', users_controller.lock);
 router.get('/unlock/:id', users_controller.unlock);
-
+router.get('/check', users_controller.check);
 router.get('/edit/:id', users_controller.getEdit);
 router.post('/edit/:id', users_controller.postEdit);
 module.exports = router;
