@@ -34,7 +34,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use('/api/user', apiUserRouter);
 
-//app.use('/', loginRouter);
+app.use('/', homeRouter);
 app.use('/users', usersRouter);
 app.use('/admins', adminRouter);
 app.use('/home', homeRouter);
@@ -48,24 +48,7 @@ app.post('/login',
     failureRedirect: '/login'
   })
 );
-function checkSignIn(req, res){
-  console.log(req.user.email+"fsdkgkfdgkf")
-  if(req.user){
-   
-     next();     //If session exists, proceed to page
-  } else {
-    res.redirect('/login');
-  }
-}
-app.get('/', checkSignIn, function(req, res){
-  res.render('index.ejs', {user:req.user})
-});
-app.use('/', function(err, req, res, next){
-  if(req.user)
-  res.render('index.ejs', {user:req.user})
-else
-     res.redirect('/login');
-  });
+
 app.use('/login', loginRouter);
 passport.use(new LocalStrategy((username, password, done) => {
   console.log(username)
