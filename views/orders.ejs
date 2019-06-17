@@ -59,18 +59,6 @@
 										<button class="au-btn-filter">
 											<i class="zmdi zmdi-filter-list"></i>filters</button>
 									</div>
-									<div class="table-data__tool-right">
-										<button class="au-btn au-btn-icon au-btn--green au-btn--small">
-											<i class="zmdi zmdi-plus"></i>Thêm đơn hàng</button>
-										<div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-											<select class="js-select2" name="type">
-												<option selected="selected">Export</option>
-												<option value="">Option 1</option>
-												<option value="">Option 2</option>
-											</select>
-											<div class="dropDownSelect2"></div>
-										</div>
-									</div>
 								</div>
 								<div class="table-responsive table-responsive-data2">
 									<table class="table table-data2">
@@ -93,11 +81,30 @@
 												</td>
 												<td><%= oItem.odate %></td>
 												<td><%= oItem.total %></td>
+												<% var s = ""; %>
+												<% if (oItem.stt == 0) { %>
+												<% s = "Đang chờ xác nhận"; %>
+												<% } else if (oItem.stt == 1) { %>
+												<% s = "Đã hủy;" %>
+												<% } else if (oItem.stt == 2) { %>
+												<% s = "Đang giao hàng"; %>
+												<% } else if (oItem.stt == 3) { %>
+												<% s = "Đã giao hàng"; %>
+												<% } %>
+												
 												<td>
-													<span class="status--warning"><%= oItem.stt %></span>
+													<span class="status--warning"><%= s %></span>
 												</td>
 												<td>
 													<a>Xem chi tiết</a>
+													<% var a = ""; %>
+													<% if (oItem.stt == 0) { %>
+														<a> | </a>
+														<a href="/orders/confirm/<%= oItem.id %>">Xác nhận đơn</a>
+													<% } else if (oItem.stt == 2) { %>
+														<a> | </a>
+														<a href="/orders/confirm-delivery/<%= oItem.id %>">Xác nhận đã giao hàng</a>
+													<% } %>
 												</td>
 											</tr>
 											<tr class="spacer"></tr>
