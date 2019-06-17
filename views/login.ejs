@@ -20,14 +20,15 @@
 						</a>
 					</div>
 					<div class="login-form">
+						<p class="text-danger"><%= error %></p>
 						<form action="/login" method="post">
 							<div class="form-group">
 								<label>Tên đăng nhập</label>
-								<input class="au-input au-input--full" type="username" name="username" placeholder="Username">
+								<input class="au-input au-input--full" type="username" name="username" placeholder="Username" required autofocus>
 							</div>
 							<div class="form-group">
 								<label>Mật khẩu</label>
-								<input class="au-input au-input--full" type="password" name="password" placeholder="Password">
+								<input class="au-input au-input--full" type="password" name="password" placeholder="Password" required>
 							</div>
 							<div class="login-checkbox">
 								<label>

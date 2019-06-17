@@ -47,7 +47,7 @@ app.use('/orders', orderRouter);
 app.post('/login',
   passport.authenticate('local', {
     successRedirect: '/home',
-    failureRedirect: '/login'
+    failureRedirect: '/login?error'
   })
 );
 
@@ -55,8 +55,7 @@ app.use('/login', loginRouter);
 passport.use(new LocalStrategy((username, password, done) => {
   console.log(username)
   conn.query('SELECT * FROM admins WHERE username = ?', username, function (err, users) {
-
-    if (err) return done(null, false);
+    if (err || users.length == 0) return done(null, false);
     var res1 = md51(password);
     console.log(users[0].password)
     if (users[0] && users[0].password === res1) {
@@ -64,14 +63,11 @@ passport.use(new LocalStrategy((username, password, done) => {
     } else {
       return done(null, false)
     }
-
   })
-
 }
 ));
 passport.serializeUser((user, done) => {
   done(null, user.username);
-
 })
 passport.deserializeUser((name, done) => {
 
@@ -84,28 +80,6 @@ passport.deserializeUser((name, done) => {
     }
   })
 })
-// ajax
-
-// var blocks = {};
-
-// hbs.registerHelper('extend', function(name, context) {
-//   var block = blocks[name];
-//   if (!block) {
-//     block = blocks[name] = [];
-//   }
-
-//   block.push(context.fn(this)); // for older versions of handlebars, use block.push(context(this));
-// });
-
-// hbs.registerHelper('block', function(name) {
-//   var val = (blocks[name] || []).join('\n');
-
-//   // clear the block
-//   blocks[name] = [];
-//   return val;
-// });
-
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
