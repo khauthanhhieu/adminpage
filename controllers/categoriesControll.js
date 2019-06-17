@@ -7,7 +7,7 @@ exports.loadPage = function (req, res, next) {
     var sql = "SELECT * FROM categories WHERE isdelete=0";
     conn.query(sql, function (err, categories, fields) {
         if (err) throw err;
-        res.render('catogories', { title: 'Express', cList: categories });
+        res.render('catogories', { title: 'Express', cList: categories, user: req.user });
         //res.end();
     });
 }
@@ -40,7 +40,7 @@ exports.getEdit = function(req, res) {
 	var sql = `SELECT * FROM categories WHERE id=?`;
 	conn.query(sql, id, function (err, categories, fields) {
         if (err) throw err;
-        res.render('editCategory', { title: 'Express', cItem: categories[0] });
+        res.render('editCategory', { title: 'Express', cItem: categories[0], user: req.user });
         //res.end();
     });
 }

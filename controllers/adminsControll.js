@@ -6,19 +6,13 @@ exports.loadPage = function (req, res, next) {
     var sql = "SELECT * FROM admins WHERE isdelete=0";
     conn.query(sql, function (err, admins, fields) {
         if (err) throw err;
-        res.render('admin-acc', { title: 'Express', aList: admins });
+        res.render('admin-acc', { title: 'Express', aList: admins, user: req.user });
         //res.end();
     });
 }
 
 exports.getCreate = function (req, res, next) {
-    res.render('createAdmin', { title: 'Express' });
-}
-
-function isExists(username) {
-    return conn.query(check, d, (err, results, fields) => {
-        return results.length;
-    })
+    res.render('createAdmin', { title: 'Express', user: req.user });
 }
 
 exports.postCreate = function (req, res, next) {
@@ -40,9 +34,7 @@ exports.postCreate = function (req, res, next) {
                 console.log('insert xong');
                 res.redirect('/admins');
             });
-           
         }
-      
     })
 }
 
@@ -65,6 +57,6 @@ exports.details = function (req, res, next) {
             return console.error(err.message);
         }
         console.log(results[0]);
-        res.render('detailAdmin', { title: 'Express', aItem : results[0] });
+        res.render('detailAdmin', { title: 'Express', aItem : results[0], user: req.user });
     });
 }

@@ -12,7 +12,7 @@ exports.loadPage = function(req, res) {
 		if (err) throw err;
 		var sql1 = "SELECT count(*) as value FROM products WHERE isdelete=0";
 		conn.query(sql1, function(err, count, fields) {
-			res.render('products', {title : 'Express', uList: products, nPage : (count[0].value - 1)/10 + 1, iPage : p});
+			res.render('products', {title : 'Express', uList: products, nPage : (count[0].value - 1)/10 + 1, iPage : p, user: req.user});
 		});
 	});
 };
@@ -21,7 +21,7 @@ exports.getAdd = function(req, res) {
 	var sql = "SELECT * FROM categories WHERE isdelete=0";
 	conn.query(sql, function (err, categories, fields){
 		if (err) throw err;
-		res.render('addProduct', {title : 'Express', cList: categories });
+		res.render('addProduct', {title : 'Express', cList: categories, user: req.user });
 	});
 };
 
@@ -79,7 +79,7 @@ exports.getEdit = function(req, res) {
 		var id = req.params.id
 		conn.query(sql, id, function(err, product, fields){
 			if (err) throw err;
-			res.render('editProduct', {title : 'Express', cList : categories, pItem : product[0]});
+			res.render('editProduct', {title : 'Express', cList : categories, pItem : product[0], user: req.user});
 		});
     });
 }
@@ -105,7 +105,7 @@ exports.getDelete = function(req, res) {
 
 	conn.query(sql, id, function(err, product, fields){
 		if (err) throw err;
-		res.render('deleteProduct', {title : 'Express', cItem : product[0]});
+		res.render('deleteProduct', {title : 'Express', cItem : product[0], user: req.user});
 	});
 }
 
