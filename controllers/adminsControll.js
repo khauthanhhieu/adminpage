@@ -36,7 +36,7 @@ exports.postCreate = function (req, res, next) {
         console.log(results);
         if (results.length == 0) {
             var sql = `INSERT INTO admins(fullname, username, password, email, tel, birthday, address) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-            var password = md5(req.body.txtPass);
+            var password = md5(req.body.password);
             var data = [req.body.fullname, req.body.username, password, req.body.email, req.body.tel, req.body.birth, req.body.addr];
             conn.query(sql, data, (err, results, fields) => {
                 if (err) {
