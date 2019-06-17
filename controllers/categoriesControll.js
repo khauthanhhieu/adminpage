@@ -4,12 +4,18 @@ var category = require('../models/category').Category;
 var conn = require('./connection');
 
 exports.loadPage = function (req, res, next) {
+	if(req.user){
     var sql = "SELECT * FROM categories WHERE isdelete=0";
     conn.query(sql, function (err, categories, fields) {
         if (err) throw err;
-        res.render('catogories', { title: 'Express', cList: categories, user: req.user });
+        res.render('catogories', { user:req.user, cList: categories, user: req.user });
         //res.end();
-    });
+		});
+	}
+	else{
+		res.redirect('/login');
+	}
+
 }
 
 exports.create = function (req, res, next) {
@@ -40,7 +46,7 @@ exports.getEdit = function(req, res) {
 	var sql = `SELECT * FROM categories WHERE id=?`;
 	conn.query(sql, id, function (err, categories, fields) {
         if (err) throw err;
-        res.render('editCategory', { title: 'Express', cItem: categories[0], user: req.user });
+        res.render('editCategory', { user:req.user, cItem: categories[0], user: req.user });
         //res.end();
     });
 }

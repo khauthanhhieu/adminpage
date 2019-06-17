@@ -2,6 +2,7 @@ var statistics = require('express');
 var conn = require('./connection');
 
 exports.loadPageSales = function (req, res) {
+	if(req.user){
 	var sqld = `SELECT DATE_FORMAT(date, "%d/%m/%Y") as date, SUM(total) as total FROM orders 
 				GROUP BY date 
 				ORDER BY orders.date`;
@@ -71,6 +72,9 @@ exports.loadPageSales = function (req, res) {
 			});
 		});
 	});
+}else{
+	res.redirect('/login');
+}
 }
 
 exports.loadPageQuantity = function (req, res) {

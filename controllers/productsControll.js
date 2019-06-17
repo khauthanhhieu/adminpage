@@ -2,6 +2,7 @@ var products = require('express');
 var conn = require('./connection');
 
 exports.loadPage = function(req, res) {
+	if(req.user){
 	var p = req.query.p;
 	if (p == null)
 		p = 1;
@@ -13,6 +14,9 @@ exports.loadPage = function(req, res) {
 			res.render('products', {title : 'Express', uList: products, nPage : (count[0].value - 1)/10 + 1, iPage : p, user: req.user});
 		});
 	});
+}else{
+	res.redirect('/login');
+}
 };
 
 exports.getAdd = function(req, res) {
