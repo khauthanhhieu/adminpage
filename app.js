@@ -54,7 +54,7 @@ app.post('/login',
 app.use('/login', loginRouter);
 passport.use(new LocalStrategy((username, password, done) => {
   console.log(username)
-  conn.query('SELECT * FROM admins WHERE username = ?', username, function (err, users) {
+  conn.query('SELECT * FROM admins WHERE username = ? && isdelete=0', username, function (err, users) {
     if (err || users.length == 0) return done(null, false);
     var res1 = md51(password);
     console.log(users[0].password)

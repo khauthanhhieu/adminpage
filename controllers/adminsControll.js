@@ -23,17 +23,23 @@ exports.loadPage = function (req, res, next) {
 }
 
 exports.getCreate = function (req, res, next) {
-    res.render('createAdmin', { user:req.user, user: req.user });
+    var error = "";
+    if (req.query.error == "")
+        error = "Username đã được sử dụng, vui lòng chọn Username khác !";
+    res.render('createAdmin', { user:req.user, user: req.user , error : error });
 }
 
 exports.postCreate = function (req, res, next) {
-    var check = `SELECT * FROM admins WHERE isdelete=0 and (username=?)`;
+    var check = `SELECT * FROM admins WHERE username=?`;
     var d = [req.body.username];
     conn.query(check, d, (err, results, fields) => {
         if (err) {
             return console.error(err.message);
         }
         console.log(results);
+        if (results.length != 0) {
+            return res.redirect('/admins/create?error');
+        }
         if (results.length == 0) {
             var sql = `INSERT INTO admins(fullname, username, password, email, tel, birthday, address) VALUES (?, ?, ?, ?, ?, ?, ?)`;
             var password = md5(req.body.password);
