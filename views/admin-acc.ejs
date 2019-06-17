@@ -57,7 +57,7 @@
                                                 <th>ID</th>
                                                 <th>Họ và tên</th>
                                                 <th>Username</th>
-                                                <th>Quyền hạn</th>
+                                                <th>Tình trạng</th>
                                                 <th>Thao tác</th>
 
                                             </tr>
@@ -68,12 +68,25 @@
                                                 <td><%= aItem.id %></td>
                                                 <td><%= aItem.fullname %></td>
                                                 <td><%= aItem.username %></td>
-                                                <td></td>
+                                                <% if (aItem.isdelete == 0) { %>
+                                                <td>Hoạt động</td>
+                                                <% } else { %>
+                                                <td>Bị khóa</td>
+                                                <% } %>
                                                 <td>
-                                                    <a href="/admins/delete/<%= aItem.id %>" class="au-btn btn-danger">
-                                                        <i class="far fa-trash-alt"></i>
+                                                    <% if (aItem.id != user.id) { %>
+                                                    <% if (aItem.isdelete == 0) { %>
+                                                    <a href="/admins/lock/<%= aItem.id %>" class="au-btn btn-danger">
+                                                        <i class="fas fa-lock"></i>
                                                     </a>
-                                                    <a href="/admins/detail/<%= aItem.id %>">Xem chi tiết</a>
+                                                    <% } else { %>
+                                                    <a href="/admins/unlock/<%= aItem.id %>" class="au-btn btn-danger">
+                                                        <i class="fas fa-unlock"></i>
+                                                    </a>
+                                                    <% } } %>
+                                                    <a href="/admins/detail/<%= aItem.id %>" class="au-btn btn-success">
+                                                        <i class="fas fa-info"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <% }); %>
@@ -82,6 +95,36 @@
                                 </div>
                                 <!-- END TABLE -->
                             </div>
+                        </div>
+                        <div class="row">
+                            <ul class="pagination">
+                                <% if(iPage > 1) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/admins?p=<%= iPage - 1 %>">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <% } %>
+                                <% var begin = 1; %>
+                                <% if (begin < iPage - 1) begin = iPage - 1; %>
+                                <% var end = nPage %>
+                                <% if (end > begin + 5) end = begin + 5; %>
+                                <% for(var i = begin; i <= end; i++) { %>
+                                <% if(iPage == i) { %>
+                                <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
+                                <% } else { %>
+                                <li class="page-item"><a class="page-link" href="/admins?p=<%= i %>"><%= i %></a></li>
+                                <% } %>
+                                <% } %>
+                                <% if (iPage < parseInt(nPage)) { %>
+                                <% console.log(iPage + "<" + nPage) %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/admins?p=<%= parseInt(iPage) + 1 %>">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <% } %>
+                            </ul>
                         </div>
                     </div>
 

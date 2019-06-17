@@ -69,26 +69,24 @@
                                                 <td><%= uItem.fullname %></td>
                                                 <td><%= uItem.username %></td>
                                                 <% if (uItem.isdelete == 0) { %>
-                                                    <td>Hoạt động</td>
+                                                <td>Hoạt động</td>
                                                 <% } else { %>
-                                                    <td>Đã khóa</td>
+                                                <td>Đã khóa</td>
                                                 <% } %>
                                                 <td>
-                                                    <a href="/users/edit/<%= uItem.id %>"
-                                                        class="au-btn btn-success">
+                                                    <a href="/users/edit/<%= uItem.id %>" class="au-btn btn-success">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                     <% if (uItem.isdelete == 0) { %>
-                                                        <a href="/users/lock/<%= uItem.id %>" class="au-btn btn-danger">
-                                                            <i class="fas fa-lock"></i>
-                                                        </a>
+                                                    <a href="/users/lock/<%= uItem.id %>" class="au-btn btn-danger">
+                                                        <i class="fas fa-lock"></i>
+                                                    </a>
                                                     <% } else { %>
-                                                        <a href="/users/unlock/<%= uItem.id %>" class="au-btn btn-danger">
-                                                            <i class="fas fa-unlock"></i>
-                                                        </a>
+                                                    <a href="/users/unlock/<%= uItem.id %>" class="au-btn btn-danger">
+                                                        <i class="fas fa-unlock"></i>
+                                                    </a>
                                                     <% } %>
-                                                    <a href="/users/detail/<%= uItem.id %>"
-                                                        class="au-btn btn-success">
+                                                    <a href="/users/detail/<%= uItem.id %>" class="au-btn btn-success">
                                                         <i class="fas fa-info"></i>
                                                     </a>
                                                 </td>
@@ -101,35 +99,35 @@
                             </div>
                         </div>
                         <div class="row">
-                                <ul class="pagination">
-                                    <% if(iPage > 1) { %>
-                                        <li class="page-item"> 
-                                            <a class="page-link" href="/products?p=<%= iPage - 1 %>">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a> 
-                                        </li>
-                                    <% } %>
-                                    <% var begin = 1; %>
-                                    <% if (begin < iPage - 1) begin = iPage - 1; %>
-                                    <% var end = nPage %>
-                                    <% if (end > begin + 5) end = begin + 5; %>
-                                    <% for(var i = begin; i <= end; i++) { %>
-                                        <% if(iPage == i) { %>
-                                            <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
-                                        <% } else { %>
-                                            <li class="page-item"><a class="page-link" href="/users?p=<%= i %>"><%= i %></a></li>
-                                        <% } %>
-                                    <% } %>
-                                    <% if (iPage < parseInt(nPage)) { %>
-                                        <% console.log(iPage + "<" + nPage) %>
-                                        <li class="page-item">
-                                            <a class="page-link" href="/users?p=<%= parseInt(iPage) + 1 %>">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    <% } %>
-                                </ul>
-                            </div>
+                            <ul class="pagination">
+                                <% if(iPage > 1) { %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/users?p=<%= iPage - 1 %>">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <% } %>
+                                <% var begin = 1; %>
+                                <% if (begin < iPage - 1) begin = iPage - 1; %>
+                                <% var end = nPage %>
+                                <% if (end > begin + 5) end = begin + 5; %>
+                                <% for(var i = begin; i <= end; i++) { %>
+                                <% if(iPage == i) { %>
+                                <li class="page-item active"><a class="page-link" href="#"><%= i %></a></li>
+                                <% } else { %>
+                                <li class="page-item"><a class="page-link" href="/users?p=<%= i %>"><%= i %></a></li>
+                                <% } %>
+                                <% } %>
+                                <% if (iPage < parseInt(nPage)) { %>
+                                <% console.log(iPage + "<" + nPage) %>
+                                <li class="page-item">
+                                    <a class="page-link" href="/users?p=<%= parseInt(iPage) + 1 %>">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                                <% } %>
+                            </ul>
+                        </div>
                     </div>
 
                 </div>

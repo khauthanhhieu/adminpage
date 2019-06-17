@@ -1,5 +1,5 @@
 var users = require('express');
-var md5=require('md5');
+var md5 = require('md5');
 var conn = require('./connection');
 const Admin = require('../models/users');
 exports.loadPage = function (req, res, next) {
