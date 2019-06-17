@@ -86,3 +86,12 @@ exports.postEdit = function(req, res) {
     });
     res.redirect('../');
 }
+
+exports.detail = function(req, res) {
+    var sql = `SELECT *, DATE_FORMAT(birthday, "%d/%m/%Y") as birth FROM users WHERE id=?`;
+    var data = [req.params.id];
+    conn.query(sql, data, (err, results, fields) => {
+        if (err) throw err;
+        res.render('detailUser', { title: 'Express', uItem : results[0], user: req.user });
+    });
+}

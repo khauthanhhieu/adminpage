@@ -10,4 +10,5 @@ router.get('/unlock/:id', users_controller.unlock);
 router.get('/check', users_controller.check);
 router.get('/edit/:id', users_controller.getEdit);
 router.post('/edit/:id', users_controller.postEdit);
+router.get('/detail/:id', users_controller.detail);
 module.exports = router;

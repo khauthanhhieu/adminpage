@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Dashboard</title>
+    <% include partials/headadmin.ejs %>
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <% include partials/headeradmin.ejs %>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <% include partials/menusidebar.ejs %>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <% include partials/headdesktop.ejs %>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <h2 class="title-1 m-b-25">Thông tin quản trị viên</h2>
+                                <div class="au-card au-card--bg-blue au-card-top-countries m-b-40">
+                                    <div class="au-card-inner">
+                                        <div class="table-responsive">
+                                            <table class="table table-top-countries">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Họ và tên</td>
+                                                        <td class="text-right"><%= uItem.fullname %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tên người dùng</td>
+                                                        <td class="text-right"><%= uItem.username %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Địa chỉ email</td>
+                                                        <td class="text-right"><%= uItem.email %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Số điện thoại</td>
+                                                        <td class="text-right"><%= uItem.tel %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Ngày sinh</td>
+                                                        <td class="text-right"><%= uItem.birth %></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Địa chỉ</td>
+                                                        <td class="text-right"><%= uItem.address %></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
+        </div>
+
+    </div>
+
+    <!-- Jquery JS-->
+    <% include partials/jqueryScript.ejs %>
+
+</body>
+
+</html>
+<!-- end document-->

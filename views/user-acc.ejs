@@ -56,7 +56,6 @@
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Họ và tên</th>
-                                                <th>Email</th>
                                                 <th>Username</th>
                                                 <th>Trạng thái</th>
                                                 <th>Thao tác</th>
@@ -68,9 +67,6 @@
                                             <tr>
                                                 <td><%= uItem.id %></td>
                                                 <td><%= uItem.fullname %></td>
-                                                <td>
-                                                    <span class="block-email"><%= uItem.email %></span>
-                                                </td>
                                                 <td><%= uItem.username %></td>
                                                 <% if (uItem.isdelete == 0) { %>
                                                     <td>Hoạt động</td>
@@ -91,6 +87,10 @@
                                                             <i class="fas fa-unlock"></i>
                                                         </a>
                                                     <% } %>
+                                                    <a href="/users/detail/<%= uItem.id %>"
+                                                        class="au-btn btn-success">
+                                                        <i class="fas fa-info"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <% }); %>
