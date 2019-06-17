@@ -10,5 +10,6 @@ router.post('/create', admins_controller.postCreate);
 router.get('/delete/:id', admins_controller.delete);
 
 router.get('/detail/:id', admins_controller.details);
+router.get('/detail', admins_controller.detail);
 
 module.exports = router;

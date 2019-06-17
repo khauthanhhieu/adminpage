@@ -123,9 +123,6 @@
 				</div>
 				<div class="account-wrap">
 					<div class="account-item clearfix js-item-menu">
-						<div class="image">
-							<img src="/images/icon/avatar-01.jpg" alt="John Doe" />
-						</div>
 						<div class="content">
 							<% var isLogin = (typeof user !== 'undefined' && user != null); %>
 							<% if (!isLogin) { %>
@@ -138,23 +135,18 @@
 						</div>
 						<div class="account-dropdown js-dropdown">
 							<div class="info clearfix">
-								<div class="image">
-									<a href="#">
-										<img src="/images/icon/avatar-01.jpg" alt="John Doe" />
-									</a>
-								</div>
 								<% if (isLogin) { %>
 								<div class="content">
 									<h5 class="name">
-										<a href="#"><%=user.fullname %></a>
+										<a href="#"><%= user.fullname %></a>
 									</h5>
-									<span class="email"><%=user.email%></span>
+									<span class="email"><%= user.email %></span>
 								</div>
 								<% } %>
 							</div>
 							<div class="account-dropdown__body">
 								<div class="account-dropdown__item">
-									<a href="#">
+									<a href="/admins/detail">
 										<i class="zmdi zmdi-account"></i>Tài Khoản</a>
 								</div>
 							</div>

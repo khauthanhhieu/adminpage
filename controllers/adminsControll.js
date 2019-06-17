@@ -60,3 +60,7 @@ exports.details = function (req, res, next) {
         res.render('detailAdmin', { title: 'Express', aItem : results[0], user: req.user });
     });
 }
+
+exports.detail = function (req, res, next) {
+    res.redirect('/admins/detail/' + req.user.id);
+}
