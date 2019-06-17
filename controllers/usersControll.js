@@ -3,6 +3,7 @@ var md5=require('md5');
 var conn = require('./connection');
 const Admin = require('../models/users');
 exports.loadPage = function (req, res, next) {
+    if(req.user){
     var p = req.query.p;
 	if (p == null)
         p = 1;
@@ -13,9 +14,12 @@ exports.loadPage = function (req, res, next) {
         var sql1 = "SELECT count(*) as value FROM users";
         conn.query(sql1, function (err, count, fields) {
             if (err) throw err;
-            res.render('user-acc', { title: 'Express', uList: users, nPage : (count[0].value - 1)/10 + 1 , iPage : p });
+            res.render('user-acc', { user:req.user, uList: users, nPage : (count[0].value - 1)/10 + 1 , iPage : p });
         });
     });
+}
+else
+res.redirect('/login');
 }
 exports.check = async (req, res, next) => {
     const userExist = await Admin.check(req.query.email);
@@ -23,7 +27,7 @@ exports.check = async (req, res, next) => {
   };
 
 exports.getCreate = function(req, res) {
-    res.render('createUser', { title: 'Express'});
+    res.render('createUser', { user:req.user});
 }
 exports.create = function (req, res, next) {
     var sql = `INSERT INTO users(username, password, fullname, email, tel, birthday, address ) VALUES (?,?,?,?,?,?,?)`;
@@ -64,7 +68,7 @@ exports.getEdit = function(req, res) {
     var sql = `SELECT *, DATE_FORMAT(birthday, "%Y-%m-%d") as birth FROM users WHERE id=?`;
     conn.query(sql, id, function (err, users, fields) {
         if (err) throw err;
-        res.render('editUser', { title: 'Express', uItem: users[0] });
+        res.render('editUser', { user:req.user, uItem: users[0] });
         console.log(users[0])
         //res.end();
     });

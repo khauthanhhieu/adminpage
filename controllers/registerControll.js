@@ -2,8 +2,11 @@ var catogories = require('express');
 var conn = require('./connection');
 
 exports.loadPage = function (req, res, next) {
-    
-        res.render('users', { title: 'Express'});
+    if(req.user)
+				res.render('users', { user:req.user});
+				else
+				res.redirect('/login');
+				
 }
 
 exports.create = function (req, res, next) {
@@ -34,7 +37,7 @@ exports.getEdit = function(req, res) {
 	var sql = `SELECT * FROM categories WHERE id=?`;
 	conn.query(sql, id, function (err, categories, fields) {
         if (err) throw err;
-        res.render('editCategory', { title: 'Express', cItem: categories[0] });
+        res.render('editCategory', { user:req.user, cItem: categories[0] });
         //res.end();
     });
 }

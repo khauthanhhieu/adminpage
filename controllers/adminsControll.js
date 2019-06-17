@@ -3,16 +3,23 @@ var users = require('express');
 var conn = require('./connection');
 var md5=require('md5');
 exports.loadPage = function (req, res, next) {
+    if(req.user)
+    {
     var sql = "SELECT * FROM admins WHERE isdelete=0";
     conn.query(sql, function (err, admins, fields) {
         if (err) throw err;
-        res.render('admin-acc', { title: 'Express', aList: admins });
+        res.render('admin-acc', { user:req.user, aList: admins });
         //res.end();
     });
+    }
+    else
+    {
+        res.redirect('/login');
+    }
 }
 
 exports.getCreate = function (req, res, next) {
-    res.render('createAdmin', { title: 'Express' });
+    res.render('createAdmin', { user:req.user });
 }
 
 function isExists(username) {
@@ -65,6 +72,6 @@ exports.details = function (req, res, next) {
             return console.error(err.message);
         }
         console.log(results[0]);
-        res.render('detailAdmin', { title: 'Express', aItem : results[0] });
+        res.render('detailAdmin', { user:req.user, aItem : results[0] });
     });
 }

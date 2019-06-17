@@ -1,9 +1,12 @@
 var statistics = require('express');
 
 exports.loadPageSales = function(req, res) {
-	res.render('sales-statistics', {title: 'Express' });
+	if(req.user)
+	res.render('sales-statistics', {user:req.user});
+	else
+	res.redirect('/login')
 }
 
 exports.loadPageQuantity = function(req, res) {
-	res.render('quantity-statistics', {title: 'Express' });
+	res.render('quantity-statistics', {user:req.user });
 }
