@@ -81,27 +81,16 @@
 												</td>
 												<td><%= oItem.odate %></td>
 												<td><%= oItem.total %></td>
-												<% var s = ""; %>
-												<% if (oItem.stt == 0) { %>
-												<% s = "Đang chờ xác nhận"; %>
-												<% } else if (oItem.stt == 1) { %>
-												<% s = "Đã hủy;" %>
-												<% } else if (oItem.stt == 2) { %>
-												<% s = "Đang giao hàng"; %>
-												<% } else if (oItem.stt == 3) { %>
-												<% s = "Đã giao hàng"; %>
-												<% } %>
-												
 												<td>
-													<span class="status--warning"><%= s %></span>
+													<span class="status--warning"><%= oItem.stt %></span>
 												</td>
 												<td>
 													<a href="/orders/detail/<%= oItem.id %>">Xem chi tiết</a>
 													<% var a = ""; %>
-													<% if (oItem.stt == 0) { %>
+													<% if (oItem.idstt == 0) { %>
 														<a> | </a>
 														<a href="/orders/confirm/<%= oItem.id %>">Xác nhận đơn</a>
-													<% } else if (oItem.stt == 2) { %>
+													<% } else if (oItem.idstt == 2) { %>
 														<a> | </a>
 														<a href="/orders/confirm-delivery/<%= oItem.id %>">Xác nhận đã giao hàng</a>
 													<% } %>

@@ -4,7 +4,9 @@ var conn = require('./connection');
 
 exports.loadPage = function (req, res, next) {
     if (req.user) {
-        var sql = `SELECT orders.id as id, fullname, email, total, DATE_FORMAT(date, "%d/%m/%Y") as odate, stt FROM users, orders WHERE users.id = orders.user_id`;
+        var sql =  `SELECT orders.id as id, fullname, email, total, DATE_FORMAT(date, "%d/%m/%Y") as odate, orders.stt as idstt, status.status as stt
+                    FROM users, orders, status
+                    WHERE users.id = orders.user_id && status.idstt = orders.stt`;
         conn.query(sql, function (err, order, fields) {
             if (err) throw err;
             res.render('orders', { user: req.user, oList: order });
