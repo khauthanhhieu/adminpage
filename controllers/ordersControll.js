@@ -18,16 +18,30 @@ exports.confirm = function (req, res, next) {
     var sql = `UPDATE orders SET stt = 2 WHERE id = ?`;
     conn.query(sql, req.params.id, function (err, order, fields) {
         if (err) throw err;
+        sql = `SELECT * FROM orderdetails WHERE order_id = ?`;
+        conn.query(sql, req.params.id, function (err, orderdetails, fields) {
+            if (err) throw err;
+            console.log(orderdetails);
+            orderdetails.forEach(element => {
+                sql = `SELECT quantity as n FROM products WHERE id = ?`;
+                conn.query(sql, element.product_id, function (err, number, fields){
+                    sql = `UPDATE products SET quantity = ? WHERE id = ?`;
+                    conn.query(sql, [number[0].n - element.number, element.product_id], function (err, results, fields){
+                        if (err) throw err;
+                    });
+                });
+            });
+        }); 
+        res.redirect('/orders');
     });
-    res.redirect('/orders');
 }
 
 exports.confirmDelivery = function (req, res, next) {
     var sql = `UPDATE orders SET stt = 3 WHERE id = ?`;
     conn.query(sql, req.params.id, function (err, orders, fields) {
         if (err) throw err;
+        res.redirect('/orders');
     });
-    res.redirect('/orders');
 }
 
 exports.detail = function (req, res, next) {
