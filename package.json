@@ -11,8 +11,6 @@
     "ejs": "^2.5.9",
     "express": "^4.16.4",
     "express-session": "^1.16.1",
-    "formidable": "^1.2.1",
-    "fs": "0.0.1-security",
     "handlebars": "^4.1.2",
     "http-errors": "~1.6.2",
     "md5": "^2.2.1",

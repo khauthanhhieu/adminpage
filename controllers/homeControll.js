@@ -6,5 +6,4 @@ exports.loadPage = function (req, res) {
 	}
 	else
 		res.redirect('/login');
-	//res.render('index', {title: 'Express' });
 }
