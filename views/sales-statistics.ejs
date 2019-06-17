@@ -3,7 +3,8 @@
 
 <head>
 	<title>Thống kê</title>
-	<% include partials/headadmin.ejs%>
+	<% include partials/headadmin.ejs %>
+	<script src="/vendor/chartjs/Chart.bundle.min.js"></script>
 </head>
 
 <body class="animsition">
@@ -37,7 +38,31 @@
 							<div class="au-card m-b-30">
 								<div class="au-card-inner">
 									<h3 class="title-2 m-b-40">Doanh số bán hàng theo các ngày</h3>
-									<canvas id="singelBarChartngay"></canvas>
+									<canvas id="charDay"></canvas>
+									<script>
+										var ctx = document.getElementById('charDay').getContext('2d');
+										var myChart = new Chart(ctx, {
+											type: 'bar',
+											data: {
+												labels: <%- ndList %>,
+												datasets: [{
+													label: 'VND',
+													data: <%- vdList %>,
+													backgroundColor : 'rgba(83, 51, 237, 1)',
+													borderWidth: 1
+												}]
+											},
+											options: {
+												scales: {
+													yAxes: [{
+														ticks: {
+															beginAtZero: true
+														}
+													}]
+												}
+											}
+										});
+									</script>
 								</div>
 							</div>
 						</div>
@@ -47,7 +72,31 @@
 							<div class="au-card m-b-30">
 								<div class="au-card-inner">
 									<h3 class="title-2 m-b-40">Doanh số bán hàng theo các tuần</h3>
-									<canvas id="singelBarCharttuan"></canvas>
+									<canvas id="charWeek"></canvas>
+									<script>
+										var ctx = document.getElementById('charWeek').getContext('2d');
+										var myChart = new Chart(ctx, {
+											type: 'bar',
+											data: {
+												labels: <%- nwList %>,
+												datasets: [{
+													label: 'VND',
+													data: <%- vwList %>,
+													backgroundColor : 'rgba(83, 51, 237, 1)',
+													borderWidth: 1
+												}]
+											},
+											options: {
+												scales: {
+													yAxes: [{
+														ticks: {
+															beginAtZero: true
+														}
+													}]
+												}
+											}
+										});
+									</script>
 								</div>
 							</div>
 						</div>
@@ -55,7 +104,31 @@
 							<div class="au-card m-b-30">
 								<div class="au-card-inner">
 									<h3 class="title-2 m-b-40">Doanh số bán hàng theo các tháng</h3>
-									<canvas id="singelBarChartthang"></canvas>
+									<canvas id="charMonth"></canvas>
+									<script>
+										var ctx = document.getElementById('charMonth').getContext('2d');
+										var myChart = new Chart(ctx, {
+											type: 'bar',
+											data: {
+												labels: <%- nmList %>,
+												datasets: [{
+													label: 'VND',
+													data: <%- vmList %>,
+													backgroundColor : 'rgba(83, 51, 237, 1)',
+													borderWidth: 1
+												}]
+											},
+											options: {
+												scales: {
+													yAxes: [{
+														ticks: {
+															beginAtZero: true
+														}
+													}]
+												}
+											}
+										});
+									</script>
 								</div>
 							</div>
 						</div>
@@ -64,7 +137,31 @@
 							<div class="au-card m-b-30">
 								<div class="au-card-inner">
 									<h3 class="title-2 m-b-40">Doanh số bán hàng theo các quý</h3>
-									<canvas id="singelBarChartquy"></canvas>
+									<canvas id="charQuarter"></canvas>
+									<script>
+										var ctx = document.getElementById('charQuarter').getContext('2d');
+										var myChart = new Chart(ctx, {
+											type: 'bar',
+											data: {
+												labels: <%- nqList %>,
+												datasets: [{
+													label: 'VND',
+													data: <%- vqList %>,
+													backgroundColor : 'rgba(83, 51, 237, 1)',
+													borderWidth: 1
+												}]
+											},
+											options: {
+												scales: {
+													yAxes: [{
+														ticks: {
+															beginAtZero: true
+														}
+													}]
+												}
+											}
+										});
+									</script>
 								</div>
 							</div>
 						</div>
@@ -72,7 +169,31 @@
 							<div class="au-card m-b-30">
 								<div class="au-card-inner">
 									<h3 class="title-2 m-b-40">Doanh số bán hàng theo các năm</h3>
-									<canvas id="singelBarChartnam"></canvas>
+									<canvas id="charYear"></canvas>
+									<script>
+										var ctx = document.getElementById('charYear').getContext('2d');
+										var myChart = new Chart(ctx, {
+											type: 'bar',
+											data: {
+												labels: <%- nyList %>,
+												datasets: [{
+													label: 'VND',
+													data: <%- vyList %>,
+													backgroundColor : 'rgba(83, 51, 237, 1)',
+													borderWidth: 1
+												}]
+											},
+											options: {
+												scales: {
+													yAxes: [{
+														ticks: {
+															beginAtZero: true
+														}
+													}]
+												}
+											}
+										});
+									</script>
 								</div>
 							</div>
 						</div>
