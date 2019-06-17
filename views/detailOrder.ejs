@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Dashboard</title>
+    <% include partials/headadmin.ejs %>
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <header class="header-mobile d-block d-lg-none">
+            <% include partials/headeradmin.ejs %>
+        </header>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <aside class="menu-sidebar d-none d-lg-block">
+            <% include partials/menusidebar.ejs %>
+        </aside>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <header class="header-desktop">
+                <% include partials/headdesktop.ejs %>
+            </header>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3 class="title-5 m-b-35">Chi tiết đơn hàng</h3>
+                                <p>Mã đơn hàng : <%= oItem.id %></p>
+                                <p>Tổng số tiền : <%= oItem.total %> VNĐ</p>
+                                <!-- TABLE -->
+                                <div class="table-responsive table--no-card m-b-40">
+                                    <table class="table table-borderless table-striped table-earning">
+                                        <thead>
+                                            <tr>
+                                                <th>Tên sản phẩm</th>
+                                                <th>Đơn giá</th>
+                                                <th>Số lượng</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% odList.forEach(function(odItem) { %>
+                                            <tr>
+                                                <td><%= odItem.name %></td>
+                                                <td><%= odItem.price %></td>
+                                                <td><%= odItem.number %></td>
+                                            </tr>
+                                            <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END TABLE -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jquery JS-->
+    <% include partials/jqueryScript.ejs %>
+</body>
+
+</html>
+<!-- end document-->

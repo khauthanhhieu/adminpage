@@ -24,8 +24,21 @@ exports.confirm = function (req, res, next) {
 
 exports.confirmDelivery = function (req, res, next) {
     var sql = `UPDATE orders SET stt = 3 WHERE id = ?`;
-    conn.query(sql, req.params.id, function (err, order, fields) {
+    conn.query(sql, req.params.id, function (err, orders, fields) {
         if (err) throw err;
     });
     res.redirect('/orders');
+}
+
+exports.detail = function (req, res, next) {
+    var sql = `SELECT id, total FROM orders WHERE id = ?`
+    conn.query(sql, req.params.id, function (err, orders, fields) {
+        if (err) throw err;
+        var sql1 =  `SELECT products.name as name, number, products.price as price
+                    FROM orderdetails, products
+                    WHERE orderdetails.product_id = products.id && order_id = ?`;
+        conn.query(sql1, req.params.id, function (err, orderdetails, fields) {
+            res.render('detailOrder', { user: req.user, oItem: orders[0], odList : orderdetails });
+        });
+    });
 }
